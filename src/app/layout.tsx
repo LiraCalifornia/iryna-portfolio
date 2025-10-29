@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 const siteUrl = "https://iryna-portfolio.vercel.app";
-const ogImage = `${siteUrl}/og.png`;
+const ogImage = `${siteUrl}/og-v3.png`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

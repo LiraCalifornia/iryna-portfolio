@@ -1,24 +1,30 @@
-// рядок 1
-import "./globals.css";
-// рядок 2
-import type { Metadata } from "next";
-
-// рядки 4–13
 export const metadata: Metadata = {
-  title: "Iryna Sofiian — Senior Product Designer",
-  description:
-    "B2B SaaS and FinTech. Based in Vienna. Open to EU remote or hybrid in Austria.",
+  metadataBase: new URL("https://iryna-portfolio.vercel.app"),
+  openGraph: {
+    title: "Iryna Sofiian — Senior Product Designer",
+    description:
+      "Product & UX design for B2B SaaS · Based in Vienna · Open to EU remote",
+    url: "https://iryna-portfolio.vercel.app",
+    images: [
+      {
+        // абсолютний URL
+        url: "https://iryna-portfolio.vercel.app/og.png",
+        // дублюємо для старих парсерів
+        secureUrl: "https://iryna-portfolio.vercel.app/og.png",
+        width: 1200,
+        height: 630,
+        type: "image/png",
+        alt: "Iryna Sofiian — Senior Product Designer",
+      },
+    ],
+    siteName: "iryna-portfolio",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Iryna Sofiian — Senior Product Designer",
+    description:
+      "Product & UX design for B2B SaaS · Based in Vienna · Open to EU remote",
+    images: ["https://iryna-portfolio.vercel.app/og.png"],
+  },
+  robots: { index: true, follow: true },
 };
-
-// рядки 15–24
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <html lang="en">
-      <body className="bg-white text-neutral-900 antialiased">{children}</body>
-    </html>
-  );
-}

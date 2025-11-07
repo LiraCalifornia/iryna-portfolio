@@ -19,7 +19,12 @@ export default function Hero() {
         <div className="absolute -right-12 top-32 h-48 w-48 opacity-25 [mask-image:radial-gradient(black,transparent_70%)]">
           <svg viewBox="0 0 100 100" className="h-full w-full">
             <defs>
-              <pattern id="dots" width="6" height="6" patternUnits="userSpaceOnUse">
+              <pattern
+                id="dots"
+                width="6"
+                height="6"
+                patternUnits="userSpaceOnUse"
+              >
                 <circle cx="1" cy="1" r="0.6" fill="currentColor" />
               </pattern>
             </defs>
@@ -28,9 +33,10 @@ export default function Hero() {
         </div>
       </div>
 
+      {/* Main layout */}
       <div className="mx-auto max-w-7xl px-6 pt-24 pb-16 sm:pt-32 sm:pb-24 lg:px-8">
         <div className="grid items-center gap-12 lg:grid-cols-12">
-          {/* LEFT — Type-first copy */}
+          {/* LEFT — text */}
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
@@ -43,7 +49,7 @@ export default function Hero() {
               Available for senior product roles
             </div>
 
-            {/* typographic stack */}
+            {/* heading */}
             <h1 className="mt-6 text-5xl font-semibold leading-[1.05] tracking-[-0.02em] text-slate-900 sm:text-6xl">
               Iryna Sofiian
             </h1>
@@ -53,10 +59,10 @@ export default function Hero() {
 
             <p className="mt-6 max-w-2xl text-[1.05rem] leading-relaxed text-slate-700">
               I design calm, conversion-driven product experiences for data-dense
-              B2B SaaS & FinTech. Vienna-based. Open to EU remote / hybrid.
+              B2B SaaS &amp; FinTech. Vienna-based. Open to EU remote / hybrid.
             </p>
 
-            {/* underline accent */}
+            {/* underline */}
             <motion.div
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
@@ -81,7 +87,7 @@ export default function Hero() {
               </Link>
             </div>
 
-            {/* tiny trust signals */}
+            {/* trust signals */}
             <ul className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-slate-600">
               <li>AI-assisted flows</li>
               <li>Data-heavy dashboards</li>
@@ -89,7 +95,7 @@ export default function Hero() {
             </ul>
           </motion.div>
 
-          {/* RIGHT — Pure image (no frame, clean edge) */}
+          {/* RIGHT — portrait */}
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
@@ -99,7 +105,7 @@ export default function Hero() {
             <div className="relative mx-auto w-full max-w-md">
               <div className="relative overflow-hidden rounded-2xl">
                 <Image
-                  src="/hero-portrait.jpg" // поклади своє фото у /public
+                  src="/hero-portrait.jpg"
                   alt="Iryna Sofiian portrait"
                   width={900}
                   height={1125}
@@ -112,7 +118,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* sticky meta pill */}
+      {/* sticky pill */}
       <motion.div
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}

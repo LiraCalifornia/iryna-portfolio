@@ -1,266 +1,186 @@
-// src/app/work/[slug]/page.tsx
-import Image from "next/image";
+// src/app/work/provenance/page.tsx
+import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 
-/* ────────────────────────────────────────────────────────────
-   Data model + demo registry
-   ──────────────────────────────────────────────────────────── */
-type ProjectData = {
-  title: string;
-  company: { name: string; logo: string };
-  domain: string;       // e.g., "FinTech"
-  platform: string;     // e.g., "B2B SaaS · Web"
-  heroImage: string;    // product UI image
-  summary: string;      // short paragraph about scope/role
-  period: string;
-  tools: string[];
-  keywords: string[];
-  problems: string;
-  solution: string;
-  challenges: string;
-  impact: Array<{ value: string; label: string; sublabel?: string }>;
+export const metadata: Metadata = {
+  title: "Provenance — Case Study | Iryna Sofiian",
+  description:
+    "Case study: Provenance. Short description of scope, role, outcomes, and product impact.",
+  alternates: { canonical: "/work/provenance" },
 };
 
-const PROJECTS: Record<string, ProjectData> = {
-  "provenance-ai": {
-    title: "Provenance AI — Allocation & Reporting",
-    company: { name: "Annuities Genius", logo: "/next.svg" }, // заміниш на реальне лого
-    domain: "FinTech",
-    platform: "B2B SaaS · Web",
-    heroImage: "/hero-portrait.jpg", // тимчасовий плейсхолдер
-    summary:
-      "Led product design for AI-driven allocation and reporting modules. Focused on decision workflows, explainability, and speed to quote.",
-    period: "2023–Present",
-    tools: ["Figma", "Plus Jakarta Sans", "Miro", "Rive"],
-    keywords: [
-      "product strategy",
-      "BRD",
-      "user flows",
-      "design system",
-      "behavioral UX",
-      "design critique",
-    ],
-    problems:
-      "Agents struggled to compare thousands of product permutations and justify allocation choices to clients. Existing tools were slow and opaque.",
-    solution:
-      "Built AI-assisted flows that surface 3 best mixes instantly, with transparent rationales and exportable reports. Reduced clicks and time-to-quote.",
-    challenges:
-      "Complex compliance constraints and rapidly changing product catalogs; need for clear ‘why’ behind each recommendation.",
-    impact: [
-      { value: "66%", label: "Increase in signup conversion rate" },
-      { value: "63.9%", label: "Increase in purchase conversion rate" },
-      { value: "460%", label: "Increase in ranked keywords" },
-      { value: "200,000+", label: "New users added" },
-      { value: "1554%", label: "Organic search growth (8 months)" },
-      { value: "$250k+", label: "Added organic traffic value" },
-    ],
-  },
-};
-
-const FALLBACK = (slug: string): ProjectData => ({
-  title: slugToTitle(slug),
-  company: { name: "Company", logo: "/file.svg" },
-  domain: "Domain",
-  platform: "Platform",
-  heroImage: "/hero-portrait.jpg",
-  summary:
-    "Short description of the project: scope, role, outcomes. Replace this text with the real summary.",
-  period: "2024",
-  tools: ["Figma", "React", "TailwindCSS"],
-  keywords: ["UX", "UI", "Design system", "Flows"],
-  problems:
-    "State the key problem succinctly. What blocked users or business outcomes?",
-  solution:
-    "Explain the high-level solution. What did you design / ship and why it worked?",
-  challenges:
-    "Call out constraints (time, data, stakeholders, compliance) and how you navigated them.",
-  impact: [
-    { value: "50%", label: "Metric improvement", sublabel: "conversion" },
-    { value: "-30%", label: "Cost to serve" },
-    { value: "NPS +12", label: "User satisfaction" },
-  ],
-});
-
-/* ────────────────────────────────────────────────────────────
-   Helpers
-   ──────────────────────────────────────────────────────────── */
-function slugToTitle(slug: string) {
-  return decodeURIComponent(slug)
-    .replace(/-/g, " ")
-    .replace(/\b\w/g, (m) => m.toUpperCase());
-}
-
-function Pill({ children }: { children: React.ReactNode }) {
+export default function ProvenancePage() {
   return (
-    <span className="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1 text-[12px] leading-[18px] font-medium text-slate-700">
-      {children}
-    </span>
-  );
-}
-
-function Stat({
-  value,
-  label,
-  sublabel,
-}: {
-  value: string;
-  label: string;
-  sublabel?: string;
-}) {
-  return (
-    <div className="space-y-1">
-      <div className="text-[36px] md:text-[44px] leading-[1.1] font-semibold text-slate-900">
-        {value}
-      </div>
-      <div className="text-[16px] leading-[26px] text-slate-700">{label}</div>
-      {sublabel && (
-        <div className="text-[14px] leading-[22px] text-slate-500">{sublabel}</div>
-      )}
-    </div>
-  );
-}
-
-function CardBlock({ title, body }: { title: string; body: string }) {
-  return (
-    <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 md:p-8">
-      <div className="text-[20px] md:text-[22px] leading-[1.3] font-semibold text-slate-900">
-        {title}
-      </div>
-      <p className="mt-3 text-[18px] leading-[28px] text-slate-800">{body}</p>
-    </div>
-  );
-}
-
-/* ────────────────────────────────────────────────────────────
-   Page (Next 16 / React 19: params — Promise)
-   ──────────────────────────────────────────────────────────── */
-export default async function WorkDetail({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
-  const { slug } = await params; // важливо: params — Promise
-  const data = PROJECTS[slug] ?? FALLBACK(slug);
-
-  return (
-    <main className="min-h-screen bg-white">
-      <div className="mx-auto max-w-6xl px-6 py-12">
+    <main className="min-h-screen bg-white py-16 sm:py-24">
+      {/* Головний консистентний wrapper */}
+      <div className="mx-auto w-full max-w-6xl px-6 lg:px-24">
         {/* Back link */}
-        <div className="mb-6">
-          <Link href="/" className="text-sm text-slate-600 hover:underline">
-            ← Back to Work
-          </Link>
-        </div>
+        <Link
+          href="/work"
+          className="text-sm text-slate-500 hover:text-slate-700 transition"
+        >
+          ← Back to Work
+        </Link>
 
-        {/* 1–3. Title + company + domain/platform */}
-        <section className="flex flex-wrap items-center gap-4">
-          <div className="h-10 w-10 overflow-hidden rounded-xl border border-slate-200 bg-white">
-            <Image
-              src={data.company.logo}
-              alt={`${data.company.name} logo`}
-              width={40}
-              height={40}
-              className="h-full w-full object-cover"
-              priority
-            />
-          </div>
-
-          <div className="mr-auto">
-            <h1 className="text-[42px] md:text-[48px] leading-[1.15] tracking-[-0.01em] font-semibold text-slate-900">
-              {data.title}
+        {/* Header */}
+        <header className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight text-slate-900">
+              Provenance
             </h1>
-            <p className="text-[14px] leading-[22px] text-slate-500">
-              {data.company.name}
+            <p className="mt-1 text-sm sm:text-base text-slate-600">
+              Company
             </p>
           </div>
 
-          <div className="flex items-center gap-2">
-            <Pill>{data.domain}</Pill>
-            <Pill>{data.platform}</Pill>
+          <div className="flex flex-wrap gap-2">
+            <span className="inline-flex items-center rounded-full border border-slate-300 px-3 py-1 text-xs text-slate-600">
+              Domain
+            </span>
+            <span className="inline-flex items-center rounded-full border border-slate-300 px-3 py-1 text-xs text-slate-600">
+              Platform
+            </span>
           </div>
+        </header>
+
+        {/* Hero image card */}
+        <section className="mt-10 rounded-3xl border border-slate-200 bg-white overflow-hidden shadow-sm">
+          <Image
+            src="/hero-portrait.jpg" // placeholder, заміниш на скрін продукту
+            alt="Product UI (placeholder)"
+            width={1600}
+            height={900}
+            className="w-full h-auto object-cover"
+          />
+          <p className="px-6 py-3 text-center text-sm text-slate-500 border-t border-slate-100">
+            Product UI (placeholder)
+          </p>
         </section>
 
-        {/* 4. Product UI placeholder */}
-        <section className="mt-8 overflow-hidden rounded-2xl border border-slate-200 bg-slate-50">
-          <div className="grid place-items-center py-16">
-            <div className="relative aspect-[16/9] w-full max-w-5xl">
-              <Image
-                src={data.heroImage}
-                alt={`${data.title} — product UI`}
-                fill
-                className="rounded-xl object-cover"
-              />
-            </div>
-            <p className="mt-2 text-[14px] leading-[22px] text-slate-500 text-center">
-              Product UI (placeholder)
-            </p>
-          </div>
-        </section>
-
-        {/* 5. Summary + Parameters */}
-        <section className="mt-10 grid gap-8 md:grid-cols-5">
-          <div className="md:col-span-3 md:max-w-[60ch]">
-            <p className="text-[18px] leading-[28px] text-slate-800">
-              {data.summary}
-            </p>
-          </div>
-
-          <div className="md:col-span-2">
-            <dl className="grid gap-4">
-              <div className="grid grid-cols-[110px_1fr] items-start gap-2">
-                <dt className="text-[12px] leading-[18px] tracking-[0.08em] uppercase text-slate-500">
-                  Period
-                </dt>
-                <dd className="text-[16px] leading-[26px] text-slate-700">
-                  {data.period}
-                </dd>
-              </div>
-
-              <div className="grid grid-cols-[110px_1fr] items-start gap-2">
-                <dt className="text-[12px] leading-[18px] tracking-[0.08em] uppercase text-slate-500">
-                  Tools
-                </dt>
-                <dd className="text-[16px] leading-[26px] text-slate-700">
-                  {data.tools.join(", ")}
-                </dd>
-              </div>
-
-              <div className="grid grid-cols-[110px_1fr] items-start gap-2">
-                <dt className="text-[12px] leading-[18px] tracking-[0.08em] uppercase text-slate-500">
-                  Keywords
-                </dt>
-                <dd className="text-[16px] leading-[26px] text-slate-700">
-                  {data.keywords.join(", ")}
-                </dd>
-              </div>
-            </dl>
-          </div>
-        </section>
-
-        {/* 6. Problem / Solution / Challenges */}
-        <section className="mt-12 grid gap-6">
-          <CardBlock title=">_ Problem" body={data.problems} />
-          <CardBlock title=">_ Solution" body={data.solution} />
-          <CardBlock title=">_ Challenges" body={data.challenges} />
-        </section>
-
-        {/* 7. Impact */}
-        <section className="mt-12">
-          <h2 className="text-[28px] md:text-[32px] leading-[1.25] tracking-[-0.01em] font-semibold text-slate-900">
-            Impact
-          </h2>
-          <p className="mt-2 text-[16px] leading-[26px] text-slate-700">
-            Both the initial launch and further iterations produced meaningful results.
+        {/* Summary + meta */}
+        <section className="mt-10 grid grid-cols-1 sm:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] gap-10">
+          <p className="text-sm sm:text-base leading-relaxed text-slate-700">
+            Short description of the project: scope, role, outcomes. Replace
+            this text with the real summary that explains what Provenance is,
+            who it serves, and how your work changed key metrics or workflows.
           </p>
 
-          <div className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {data.impact.map((s, i) => (
-              <Stat key={i} value={s.value} label={s.label} sublabel={s.sublabel} />
-            ))}
-          </div>
+          <dl className="space-y-3 text-sm text-slate-600">
+            <div>
+              <dt className="font-medium text-slate-900">Period</dt>
+              <dd>2024</dd>
+            </div>
+            <div>
+              <dt className="font-medium text-slate-900">Role</dt>
+              <dd>Senior Product Designer (end-to-end)</dd>
+            </div>
+            <div>
+              <dt className="font-medium text-slate-900">Tools</dt>
+              <dd>Figma, FigJam, Notion, React, Tailwind CSS</dd>
+            </div>
+            <div>
+              <dt className="font-medium text-slate-900">Keywords</dt>
+              <dd>UX, UI, Design system, Flows, B2B, AI-assisted</dd>
+            </div>
+          </dl>
         </section>
 
-        <div className="h-20" />
+        {/* Problem */}
+        <section className="mt-16 border-t border-slate-200 pt-10">
+          <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-slate-500">
+            &gt;_ Problem
+          </h2>
+          <p className="mt-3 text-sm sm:text-base leading-relaxed text-slate-700">
+            State the key problem succinctly. What blocked users or business
+            outcomes? Describe the friction: data complexity, low adoption,
+            unclear flows, missing trust, or whatever fits your actual case.
+          </p>
+        </section>
+
+        {/* Context & Constraints */}
+        <section className="mt-12">
+          <h2 className="text-base sm:text-lg font-semibold text-slate-900">
+            Context &amp; constraints
+          </h2>
+          <ul className="mt-3 space-y-2 text-sm sm:text-base leading-relaxed text-slate-700 list-disc list-inside">
+            <li>Briefly outline target users and their environment.</li>
+            <li>Mention technical, regulatory, or timeline constraints.</li>
+            <li>
+              Clarify expectations from stakeholders and what “success” meant.
+            </li>
+          </ul>
+        </section>
+
+        {/* Approach / Process */}
+        <section className="mt-12">
+          <h2 className="text-base sm:text-lg font-semibold text-slate-900">
+            Approach
+          </h2>
+          <p className="mt-3 text-sm sm:text-base leading-relaxed text-slate-700">
+            Summarize how you approached the problem. You can mention discovery
+            interviews, mapping existing flows, ideation workshops, quick
+            experiments, or collaboration with engineering and product.
+          </p>
+          <ul className="mt-3 space-y-2 text-sm sm:text-base leading-relaxed text-slate-700 list-disc list-inside">
+            <li>Research steps and key insights.</li>
+            <li>How hypotheses were formed and validated.</li>
+            <li>
+              How you balanced usability, visual clarity, and technical limits.
+            </li>
+          </ul>
+        </section>
+
+        {/* Solution */}
+        <section className="mt-12">
+          <h2 className="text-base sm:text-lg font-semibold text-slate-900">
+            Solution
+          </h2>
+          <p className="mt-3 text-sm sm:text-base leading-relaxed text-slate-700">
+            Describe the final experience: structure, navigation, key screens,
+            interaction patterns, and how they help users achieve their goals
+            faster and with more confidence.
+          </p>
+          <ul className="mt-3 space-y-2 text-sm sm:text-base leading-relaxed text-slate-700 list-disc list-inside">
+            <li>Clarified information hierarchy for complex data.</li>
+            <li>Reduced cognitive load with consistent patterns.</li>
+            <li>
+              Designed states for edge cases, errors, and empty data to keep UX
+              resilient.
+            </li>
+          </ul>
+        </section>
+
+        {/* Impact */}
+        <section className="mt-12">
+          <h2 className="text-base sm:text-lg font-semibold text-slate-900">
+            Impact
+          </h2>
+          <p className="mt-3 text-sm sm:text-base leading-relaxed text-slate-700">
+            Replace these placeholders with real numbers or qualitative
+            outcomes.
+          </p>
+          <ul className="mt-3 space-y-2 text-sm sm:text-base leading-relaxed text-slate-700 list-disc list-inside">
+            <li>↑ Conversion / activation / task completion.</li>
+            <li>↓ Time-to-value or onboarding friction.</li>
+            <li>
+              Feedback from users or stakeholders that proves the new experience
+              works.
+            </li>
+          </ul>
+        </section>
+
+        {/* Learnings / Closing */}
+        <section className="mt-12 mb-8">
+          <h2 className="text-base sm:text-lg font-semibold text-slate-900">
+            What I took from this project
+          </h2>
+          <p className="mt-3 text-sm sm:text-base leading-relaxed text-slate-700">
+            One or two concise reflections: about working with complex systems,
+            collaboration style, or how this case shaped your approach to future
+            B2B / AI-heavy products.
+          </p>
+        </section>
       </div>
     </main>
   );

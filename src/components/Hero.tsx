@@ -14,7 +14,7 @@ export default function Hero() {
         {/* very soft spotlight */}
         <div className="absolute inset-0 bg-[radial-gradient(1200px_600px_at_20%_0%,rgba(2,6,23,0.06),transparent_60%)]" />
         {/* keyline */}
-        <div className="absolute left-0 right-0 top-24 mx-auto h-px max-w-7xl bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
+        <div className="absolute left-0 right-0 top-24 mx-auto h-px max-w-6xl bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
         {/* neutral dots field */}
         <div className="absolute -right-12 top-32 h-48 w-48 opacity-25 [mask-image:radial-gradient(black,transparent_70%)]">
           <svg viewBox="0 0 100 100" className="h-full w-full">
@@ -33,10 +33,10 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Main layout */}
-      <div className="mx-auto max-w-7xl px-6 pt-24 pb-16 sm:pt-32 sm:pb-24 lg:px-8">
+      {/* Спільний контейнер: max-w-6xl + px-6 / lg:px-24 */}
+      <div className="mx-auto max-w-6xl px-6 pt-24 pb-16 sm:pt-32 sm:pb-24 lg:px-24">
         <div className="grid items-center gap-12 lg:grid-cols-12">
-          {/* LEFT — text */}
+          {/* LEFT — Type-first copy */}
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
@@ -49,7 +49,7 @@ export default function Hero() {
               Available for senior product roles
             </div>
 
-            {/* heading */}
+            {/* typographic stack */}
             <h1 className="mt-6 text-5xl font-semibold leading-[1.05] tracking-[-0.02em] text-slate-900 sm:text-6xl">
               Iryna Sofiian
             </h1>
@@ -62,7 +62,7 @@ export default function Hero() {
               B2B SaaS &amp; FinTech. Vienna-based. Open to EU remote / hybrid.
             </p>
 
-            {/* underline */}
+            {/* underline accent */}
             <motion.div
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
@@ -87,7 +87,7 @@ export default function Hero() {
               </Link>
             </div>
 
-            {/* trust signals */}
+            {/* tiny trust signals */}
             <ul className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-slate-600">
               <li>AI-assisted flows</li>
               <li>Data-heavy dashboards</li>
@@ -118,12 +118,12 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* sticky pill */}
+      {/* sticky meta pill */}
       <motion.div
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
-        className="pointer-events-none sticky bottom-4 z-10 mx-auto w-full max-w-7xl px-6 lg:px-8"
+        className="pointer-events-none sticky bottom-4 z-10 mx-auto w-full max-w-6xl px-6 lg:px-24"
       >
         <div className="ml-auto w-fit rounded-full border border-slate-300 bg-white/80 px-3 py-1 text-xs text-slate-600 shadow-sm backdrop-blur">
           Vienna • CET

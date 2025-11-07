@@ -17,17 +17,17 @@ export const metadata: Metadata = {
   },
 };
 
-// три фото для секції Family
+// фото для Family
 const photos = [
   {
     src: "/me-with-marshal.jpg",
     alt: "Iryna with Marshal",
-    caption: "Walks with Marshal",
+    caption: "Evening walks with Marshal",
   },
   {
     src: "/me-with-maiko.jpeg",
     alt: "Iryna with Maiko",
-    caption: "Volcanic sunset with Lyubomyr",
+    caption: "Coffee breaks with Maiko",
   },
   {
     src: "/marshal.jpeg",
@@ -38,9 +38,10 @@ const photos = [
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-white">
-      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 py-24 flex flex-col items-center">
-        <div className="w-full max-w-3xl text-left">
+    <main className="bg-white">
+      {/* Спільний контейнер: max-w-6xl + px-6 / lg:px-24 */}
+      <div className="mx-auto w-full max-w-6xl px-6 lg:px-24 py-24">
+        <div className="max-w-3xl">
           {/* HERO */}
           <header className="mb-24">
             <h1 className="text-5xl font-bold tracking-tight text-slate-900 mb-6">
@@ -83,7 +84,9 @@ export default function AboutPage() {
 
           {/* WORK */}
           <section className="mb-24">
-            <h2 className="text-2xl font-semibold text-slate-900 mb-6">Work</h2>
+            <h2 className="text-2xl font-semibold text-slate-900 mb-6">
+              Work
+            </h2>
             <div className="space-y-5 text-base leading-7 text-slate-700">
               <p>
                 The key value I bring is a broad kaleidoscope of experience.
@@ -111,7 +114,7 @@ export default function AboutPage() {
               strength. I’m deeply grateful to Lyubomyr for unwavering support.
             </p>
 
-            {/* PHOTO STRIP — три фото з підписами, без тіней */}
+            {/* Фото-стрічка */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               {photos.map(({ src, alt, caption }) => (
                 <figure
@@ -124,11 +127,11 @@ export default function AboutPage() {
                       alt={alt}
                       width={800}
                       height={600}
-                      className="w-full h-56 object-cover hover:scale-[1.03] transition-transform duration-300"
+                      className="w-full h-56 object-cover transition-transform duration-300 hover:scale-[1.03]"
                       sizes="(min-width: 640px) 33vw, 100vw"
                     />
                   </div>
-                  <figcaption className="text-center text-sm text-slate-600 p-3 font-medium">
+                  <figcaption className="px-3 py-2 text-center text-sm text-slate-600">
                     {caption}
                   </figcaption>
                 </figure>
@@ -172,7 +175,7 @@ export default function AboutPage() {
             </ul>
           </section>
 
-          {/* LINKS */}
+          {/* FIND ME */}
           <section className="mb-24">
             <h2 className="text-2xl font-semibold text-slate-900 mb-6">
               Find me
@@ -214,8 +217,8 @@ export default function AboutPage() {
           </section>
 
           {/* FOOTER */}
-          <footer className="border-t border-slate-200 pt-6 text-sm text-slate-500 text-center">
-            © 2015 – 2025 Iryna Sofiian
+          <footer className="border-t border-slate-200 pt-6 text-sm text-slate-500">
+            © 2015–2025 Iryna Sofiian
           </footer>
         </div>
       </div>

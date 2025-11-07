@@ -1,146 +1,108 @@
 // src/components/ProjectShortcuts.tsx
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
-
-type Project = {
-  slug: string;
-  title: string;
-  blurb: string;
-  metric: string;
-  metricLabel: string;
-  // we will use inline SVG data-uri placeholders so no extra files needed
-  imgDataUrl: string;
-};
-
-const projects: Project[] = [
-  {
-    slug: "provenance-ai",
-    title: "Designing a Gen AI app ecosystem",
-    blurb:
-      "Led product & UX for a Gen-AI writing suite — built MVP, validated flows and scaled onboarding.",
-    metric: "70+",
-    metricLabel: "NPS score (world-class)",
-    imgDataUrl: makePlaceholderDataUrl("green", "Provenance AI"),
-  },
-  {
-    slug: "startup-website",
-    title: "Website that boosted startup revenue",
-    blurb:
-      "Rebuild and optimize marketing site — improved acquisition and conversion through CI experiments.",
-    metric: "$250k+",
-    metricLabel: "Worth of organic traffic",
-    imgDataUrl: makePlaceholderDataUrl("warm", "Website"),
-  },
-  {
-    slug: "navigator-redesign",
-    title: "Agent allocation navigator redesign",
-    blurb:
-      "Simplified allocation flows and added AI suggestions — reduced decision time by 60% for agents.",
-    metric: "60%",
-    metricLabel: "Faster decision time",
-    imgDataUrl: makePlaceholderDataUrl("teal", "Navigator"),
-  },
-  {
-    slug: "dashboard-scaling",
-    title: "Data-dense dashboard for power users",
-    blurb:
-      "Designed high-density tables + micro-interactions for analysts, improving task speed & accuracy.",
-    metric: "3×",
-    metricLabel: "Faster reporting",
-    imgDataUrl: makePlaceholderDataUrl("slate", "Dashboard"),
-  },
-  {
-    slug: "portfolio-system",
-    title: "Editorial portfolio system",
-    blurb:
-      "Componentized case publishing flow: editorial layouts, responsive media and simple CMS integration.",
-    metric: "90%",
-    metricLabel: "Dev time saved",
-    imgDataUrl: makePlaceholderDataUrl("indigo", "Portfolio"),
-  },
-];
-
-// helper — returns SVG data URL placeholder (inline, no external assets)
-function makePlaceholderDataUrl(colorName: string, label: string) {
-  const colors: Record<string, string> = {
-    green: "#2f855a",
-    warm: "#774936",
-    teal: "#0d9488",
-    slate: "#475569",
-    indigo: "#4f46e5",
-  };
-  const bg = colors[colorName] ?? "#1f2937";
-  const text = encodeURIComponent(label);
-  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800' viewBox='0 0 1200 800'>
-    <rect width='100%' height='100%' fill='${bg}' rx='24'/>
-    <g fill='rgba(255,255,255,0.12)'>
-      <rect x='48' y='48' width='270' height='160' rx='12'/>
-      <rect x='48' y='232' width='520' height='28' rx='6'/>
-      <rect x='48' y='272' width='380' height='28' rx='6'/>
-    </g>
-    <text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Inter, ui-sans-serif, system-ui' font-size='44' fill='rgba(255,255,255,0.9)'>${text}</text>
-  </svg>`;
-  return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
-}
 
 export default function ProjectShortcuts() {
   return (
-    <section aria-labelledby="featured-work" className="mx-auto max-w-7xl px-6 py-16">
-      <div className="mb-8">
-        <p className="text-sm font-medium tracking-wide text-slate-600">FEATURED WORK</p>
-        <h2 id="featured-work" className="mt-4 text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">
+    <section className="bg-slate-50 py-16 sm:py-20">
+      {/* Спільний контейнер */}
+      <div className="mx-auto w-full max-w-6xl px-6 lg:px-24">
+        {/* Заголовок секції */}
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
+          Featured work
+        </p>
+        <h2 className="mt-2 text-3xl sm:text-4xl font-semibold tracking-tight text-slate-900">
           Design that gets results
         </h2>
-      </div>
 
-      <div className="space-y-8">
-        {projects.map((p, idx) => {
-          const isEven = idx % 2 === 1;
-          return (
-            <Link
-              key={p.slug}
-              href={`/work/${p.slug}`}
-              className="group block"
-              aria-label={`Open project ${p.title}`}
-            >
-              <motion.article
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.45, delay: idx * 0.06 }}
-                className="relative flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 transition-shadow hover:shadow-md group-hover:border-slate-800"
-              >
-                <div className={`flex flex-col gap-6 md:flex-row ${isEven ? "md:flex-row-reverse" : ""} items-center`}>
-                  {/* Text column */}
-                  <div className="md:w-1/2">
-                    <h3 className="text-2xl font-semibold text-slate-900">{p.title}</h3>
-                    <p className="mt-3 text-sm text-slate-600 max-w-prose">{p.blurb}</p>
-
-                    <div className="mt-6 flex items-start gap-4">
-                      <div className="text-4xl font-extrabold text-slate-900">{p.metric}</div>
-                      <div className="text-sm text-slate-600 mt-1">{p.metricLabel}</div>
-                    </div>
-                  </div>
-
-                  {/* Image column */}
-                  <div className="md:w-1/2">
-                    <div className="relative w-full overflow-hidden rounded-lg">
-                      <Image
-                        src={p.imgDataUrl}
-                        alt={p.title}
-                        width={1200}
-                        height={800}
-                        className="h-44 w-full object-cover md:h-56 lg:h-64 transition-transform duration-500 group-hover:scale-[1.02]"
-                      />
-                    </div>
-                  </div>
+        {/* Список проектів */}
+        <div className="mt-10 space-y-8">
+          {/* Project 1 */}
+          <Link
+            href="/work/provenance"
+            className="block rounded-3xl border border-slate-200 bg-white p-8 sm:p-10 shadow-sm hover:shadow-md transition-shadow"
+          >
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+              {/* Text */}
+              <div>
+                <h3 className="text-lg sm:text-xl font-semibold text-slate-900">
+                  Designing a Gen AI app ecosystem
+                </h3>
+                <p className="mt-3 text-sm sm:text-base leading-relaxed text-slate-700">
+                  Led product &amp; UX for a Gen-AI writing suite — built MVP,
+                  validated flows and scaled onboarding.
+                </p>
+                <div className="mt-5 flex flex-wrap items-baseline gap-4 text-sm text-slate-600">
+                  <span className="text-2xl font-semibold text-slate-900">
+                    70+
+                  </span>
+                  <span>NPS score (world-class)</span>
                 </div>
-              </motion.article>
-            </Link>
-          );
-        })}
+              </div>
+
+              {/* Placeholder image */}
+              <div className="h-52 w-full rounded-2xl bg-emerald-700/90 flex items-center justify-center text-sm font-medium text-emerald-50">
+                Provenance%20AI
+              </div>
+            </div>
+          </Link>
+
+          {/* Project 2 */}
+          <Link
+            href="/work/website-boost"
+            className="block rounded-3xl border border-slate-200 bg-white p-8 sm:p-10 shadow-sm hover:shadow-md transition-shadow"
+          >
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+              {/* Placeholder image */}
+              <div className="h-52 w-full rounded-2xl bg-amber-800/90 flex items-center justify-center text-sm font-medium text-amber-50">
+                Website
+              </div>
+
+              {/* Text */}
+              <div>
+                <h3 className="text-lg sm:text-xl font-semibold text-slate-900">
+                  Website that boosted startup revenue
+                </h3>
+                <p className="mt-3 text-sm sm:text-base leading-relaxed text-slate-700">
+                  Rebuilt and optimized marketing site — improved acquisition
+                  and conversion through CI experiments.
+                </p>
+                <div className="mt-5 flex flex-wrap items-baseline gap-4 text-sm text-slate-600">
+                  <span className="text-2xl font-semibold text-slate-900">
+                    $250k+
+                  </span>
+                  <span>Worth of organic traffic</span>
+                </div>
+              </div>
+            </div>
+          </Link>
+
+          {/* Project 3 */}
+          <Link
+            href="/work/flows"
+            className="block rounded-3xl border border-slate-200 bg-white p-8 sm:p-10 shadow-sm hover:shadow-md transition-shadow"
+          >
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+              {/* Text */}
+              <div>
+                <h3 className="text-lg sm:text-xl font-semibold text-slate-900">
+                  Operational tools &amp; AI-assisted flows
+                </h3>
+                <p className="mt-3 text-sm sm:text-base leading-relaxed text-slate-700">
+                  Product design for complex B2B workflows: permissions, data
+                  density, edge cases and smooth adoption.
+                </p>
+              </div>
+
+              {/* Placeholder status */}
+              <div className="flex items-center gap-3 justify-start lg:justify-end text-sm text-slate-600">
+                <span className="inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                <span>Selected case studies coming soon</span>
+              </div>
+            </div>
+          </Link>
+        </div>
       </div>
     </section>
   );

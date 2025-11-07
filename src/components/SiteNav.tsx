@@ -15,9 +15,9 @@ export default function SiteNav() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/80 backdrop-blur">
-      <div className="mx-auto w-full max-w-7xl px-6 lg:px-8">
+      <div className="mx-auto w-full max-w-6xl px-6 lg:px-24">
         <nav className="flex h-16 items-center justify-between">
-          {/* Лого + імʼя */}
+          {/* Logo + name */}
           <Link href="/" aria-label="Home" className="flex items-center gap-3">
             <div className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-[11px] font-semibold text-white">
               IS
@@ -27,10 +27,11 @@ export default function SiteNav() {
             </span>
           </Link>
 
-          {/* Навігація */}
+          {/* Nav links */}
           <ul className="flex items-center gap-8 text-sm font-medium">
             {links.map(({ href, label }) => {
               const isActive = pathname === href;
+
               return (
                 <li key={href} className="relative">
                   <Link
@@ -43,6 +44,7 @@ export default function SiteNav() {
                   >
                     {label}
                   </Link>
+
                   {isActive && (
                     <motion.div
                       layoutId="nav-underline"

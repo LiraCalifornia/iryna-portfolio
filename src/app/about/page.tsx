@@ -17,8 +17,8 @@ export const metadata: Metadata = {
   },
 };
 
-// фото для Family
-const photos = [
+// Фото для сімейного блоку
+const familyPhotos = [
   {
     src: "/me-with-marshal.jpg",
     alt: "Iryna with Marshal",
@@ -36,15 +36,45 @@ const photos = [
   },
 ];
 
+// Фото для мозайки в блоці Work
+// 1-а фотка — велика плитка 2x2 зліва зверху,
+// решта — стандартні квадрати навколо.
+const mosaicPhotos = [
+  {
+    src: "/about-1.jpg",
+    alt: "Workshop moment",
+    span: "md:col-span-2 md:row-span-2",
+  },
+  {
+    src: "/about-2.jpg",
+    alt: "Team collaboration",
+  },
+  {
+    src: "/about-3.jpg",
+    alt: "Sticky notes & structure",
+  },
+  {
+    src: "/about-4.jpg",
+    alt: "Quiet observation",
+  },
+  {
+    src: "/about-5.jpg",
+    alt: "Speaking & facilitation",
+  },
+  {
+    src: "/about-6.jpg",
+    alt: "Another fragment from worklife",
+  },
+];
+
 export default function AboutPage() {
   return (
     <main className="bg-white">
-      {/* Спільний контейнер: max-w-6xl + px-6 / lg:px-24 */}
       <div className="mx-auto w-full max-w-6xl px-6 lg:px-24 py-24">
         <div className="max-w-3xl">
           {/* HERO */}
           <header className="mb-24">
-            <h1 className="text-5xl font-bold tracking-tight text-slate-900 mb-6">
+            <h1 className="mb-6 text-5xl font-bold tracking-tight text-slate-900">
               About Iryna Sofiian
             </h1>
             <p className="max-w-2xl text-lg leading-relaxed text-slate-700">
@@ -57,7 +87,7 @@ export default function AboutPage() {
 
           {/* STORY */}
           <section className="mb-24">
-            <h2 className="text-2xl font-semibold text-slate-900 mb-6">
+            <h2 className="mb-6 text-2xl font-semibold text-slate-900">
               Story
             </h2>
             <div className="space-y-5 text-base leading-7 text-slate-700">
@@ -82,9 +112,9 @@ export default function AboutPage() {
             </div>
           </section>
 
-          {/* WORK */}
+          {/* WORK + МОЗАЙКА */}
           <section className="mb-24">
-            <h2 className="text-2xl font-semibold text-slate-900 mb-6">
+            <h2 className="mb-6 text-2xl font-semibold text-slate-900">
               Work
             </h2>
             <div className="space-y-5 text-base leading-7 text-slate-700">
@@ -100,34 +130,71 @@ export default function AboutPage() {
                 yet real experience remains the foundation while AI is the
                 catalyst.
               </p>
+              <p className="text-sm text-slate-500">
+                Below is a small mosaic of moments that shape how I work,
+                facilitate, and notice patterns inside teams and products.
+              </p>
+            </div>
+
+            {/* Мозайка всередині Work */}
+            <div
+              className="
+                mt-6 grid gap-3
+                grid-cols-2 grid-rows-3
+                sm:grid-cols-3 sm:grid-rows-3
+                md:grid-cols-3 md:grid-rows-3
+              "
+            >
+              {mosaicPhotos.map((photo, index) => (
+                <div
+                  key={photo.src}
+                  className={[
+                    "relative overflow-hidden rounded-none bg-slate-100",
+                    "min-h-[90px] sm:min-h-[110px] md:min-h-[140px]",
+                    photo.span ?? "",
+                    // на мобайлі — без span'ів, всі просто йдуть послідовно
+                    index === 0 ? "col-span-2 row-span-2 sm:col-span-2 sm:row-span-2 md:col-span-2 md:row-span-2" : "",
+                  ]
+                    .filter(Boolean)
+                    .join(" ")}
+                >
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    fill
+                    // auto-size + scale всередині контейнера
+                    className="object-cover transition-transform duration-500 ease-out hover:scale-[1.03]"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 33vw"
+                  />
+                </div>
+              ))}
             </div>
           </section>
 
           {/* FAMILY */}
           <section className="mb-24">
-            <h2 className="text-2xl font-semibold text-slate-900 mb-6">
+            <h2 className="mb-6 text-2xl font-semibold text-slate-900">
               Family
             </h2>
-            <p className="text-base leading-7 text-slate-700 mb-10">
+            <p className="mb-10 text-base leading-7 text-slate-700">
               There are three of us: two imperfect humans and one perfect dog —
               Marshal. Our home is the cozy, safe place that gives balance and
               strength. I’m deeply grateful to Lyubomyr for unwavering support.
             </p>
 
-            {/* Фото-стрічка */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-              {photos.map(({ src, alt, caption }) => (
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+              {familyPhotos.map(({ src, alt, caption }) => (
                 <figure
                   key={src}
-                  className="bg-white rounded-xl border border-slate-200"
+                  className="rounded-none border border-slate-200 bg-white"
                 >
-                  <div className="overflow-hidden rounded-t-xl">
+                  <div className="overflow-hidden rounded-t-none">
                     <Image
                       src={src}
                       alt={alt}
                       width={800}
                       height={600}
-                      className="w-full h-56 object-cover transition-transform duration-300 hover:scale-[1.03]"
+                      className="h-56 w-full object-cover transition-transform duration-300 hover:scale-[1.03]"
                       sizes="(min-width: 640px) 33vw, 100vw"
                     />
                   </div>
@@ -141,12 +208,12 @@ export default function AboutPage() {
 
           {/* VALUES */}
           <section className="mb-24">
-            <h2 className="text-2xl font-semibold text-slate-900 mb-8">
+            <h2 className="mb-8 text-2xl font-semibold text-slate-900">
               Values
             </h2>
             <ul className="grid gap-4">
-              <li className="rounded-2xl border border-slate-200 p-5">
-                <h3 className="text-lg font-semibold text-slate-900 mb-2">
+              <li className="rounded-none border border-slate-200 p-5">
+                <h3 className="mb-2 text-lg font-semibold text-slate-900">
                   People
                 </h3>
                 <p className="text-base leading-7 text-slate-700">
@@ -154,8 +221,8 @@ export default function AboutPage() {
                   start by listening and understanding.
                 </p>
               </li>
-              <li className="rounded-2xl border border-slate-200 p-5">
-                <h3 className="text-lg font-semibold text-slate-900 mb-2">
+              <li className="rounded-none border border-slate-200 p-5">
+                <h3 className="mb-2 text-lg font-semibold text-slate-900">
                   Continuous Learning
                 </h3>
                 <p className="text-base leading-7 text-slate-700">
@@ -163,8 +230,8 @@ export default function AboutPage() {
                   irrelevant tomorrow. Problems evolve.
                 </p>
               </li>
-              <li className="rounded-2xl border border-slate-200 p-5">
-                <h3 className="text-lg font-semibold text-slate-900 mb-2">
+              <li className="rounded-none border border-slate-200 p-5">
+                <h3 className="mb-2 text-lg font-semibold text-slate-900">
                   Partnership
                 </h3>
                 <p className="text-base leading-7 text-slate-700">
@@ -177,14 +244,14 @@ export default function AboutPage() {
 
           {/* FIND ME */}
           <section className="mb-24">
-            <h2 className="text-2xl font-semibold text-slate-900 mb-6">
+            <h2 className="mb-6 text-2xl font-semibold text-slate-900">
               Find me
             </h2>
-            <ul className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <ul className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
               <li>
                 <Link
                   href="https://www.linkedin.com/in/iryna-sofiian/"
-                  className="block rounded-xl border border-slate-200 p-4 hover:bg-slate-50"
+                  className="block rounded-none border border-slate-200 p-4 hover:bg-slate-50"
                 >
                   LinkedIn
                 </Link>
@@ -192,7 +259,7 @@ export default function AboutPage() {
               <li>
                 <Link
                   href="https://www.strava.com/athletes/32493473"
-                  className="block rounded-xl border border-slate-200 p-4 hover:bg-slate-50"
+                  className="block rounded-none border border-slate-200 p-4 hover:bg-slate-50"
                 >
                   Strava
                 </Link>
@@ -200,7 +267,7 @@ export default function AboutPage() {
               <li>
                 <Link
                   href="https://www.instagram.com/sofiian.iryna/"
-                  className="block rounded-xl border border-slate-200 p-4 hover:bg-slate-50"
+                  className="block rounded-none border border-slate-200 p-4 hover:bg-slate-50"
                 >
                   Instagram
                 </Link>
@@ -208,7 +275,7 @@ export default function AboutPage() {
               <li>
                 <Link
                   href="https://www.facebook.com/iryna.sofiyan"
-                  className="block rounded-xl border border-slate-200 p-4 hover:bg-slate-50"
+                  className="block rounded-none border border-slate-200 p-4 hover:bg-slate-50"
                 >
                   Facebook
                 </Link>

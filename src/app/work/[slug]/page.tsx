@@ -164,84 +164,106 @@ export default async function WorkDetailPage({
         </header>
 
         {hasFullCase ? (
-          <section className="mt-10 space-y-6 sm:space-y-7">
-            {/* Problem */}
-            <div className="rounded-xl bg-slate-50 border border-slate-200 px-4 py-4 sm:px-6 sm:py-6">
-              <h2 className="flex items-center gap-1 text-xs sm:text-sm font-semibold uppercase tracking-wide text-slate-700">
-                <span className="text-blue-600 text-base font-mono">{">_"}</span>
-                Problem
-              </h2>
-              {problem && (
-                <p className="mt-2 text-sm sm:text-base leading-relaxed">
-                  <span className="font-semibold text-slate-900">
-                    {splitText(problem).first}.
-                  </span>{" "}
-                  <span className="text-slate-500">
-                    {splitText(problem).rest}
-                  </span>
-                </p>
-              )}
-            </div>
-
-            {/* Solution */}
-            <div className="rounded-xl bg-slate-50 border border-slate-200 px-4 py-4 sm:px-6 sm:py-6">
-              <h2 className="flex items-center gap-1 text-xs sm:text-sm font-semibold uppercase tracking-wide text-slate-700">
-                <span className="text-blue-600 text-base font-mono">{">_"}</span>
-                Solution
-              </h2>
-              {solution && (
-                <p className="mt-2 text-sm sm:text-base leading-relaxed">
-                  <span className="font-semibold text-slate-900">
-                    {splitText(solution).first}.
-                  </span>{" "}
-                  <span className="text-slate-500">
-                    {splitText(solution).rest}
-                  </span>
-                </p>
-              )}
-            </div>
-
-            {/* Challenges */}
-            {challenges && challenges.length > 0 && (
+          <>
+            {/* Problem / Solution / Challenges */}
+            <section className="mt-10 space-y-6 sm:space-y-7">
+              {/* Problem */}
               <div className="rounded-xl bg-slate-50 border border-slate-200 px-4 py-4 sm:px-6 sm:py-6">
                 <h2 className="flex items-center gap-1 text-xs sm:text-sm font-semibold uppercase tracking-wide text-slate-700">
-                  <span className="text-blue-600 text-base font-mono">{">_"}</span>
-                  Challenges
+                  <span className="text-blue-600 text-base font-mono">
+                    {">_"}
+                  </span>
+                  Problem
                 </h2>
-                <ul className="mt-2 space-y-1.5 text-sm sm:text-base leading-relaxed">
-                  {challenges.map((item, index) => {
-                    const { first, rest } = splitText(item);
-                    return (
-                      <li key={index}>
-                        <span className="font-semibold text-slate-900">
-                          {first}.
-                        </span>{" "}
-                        <span className="text-slate-500">{rest}</span>
-                      </li>
-                    );
-                  })}
-                </ul>
+                {problem && (
+                  <p className="mt-2 text-sm sm:text-base leading-relaxed">
+                    <span className="font-semibold text-slate-900">
+                      {splitText(problem).first}.
+                    </span>{" "}
+                    <span className="text-slate-500">
+                      {splitText(problem).rest}
+                    </span>
+                  </p>
+                )}
               </div>
-            )}
 
-            {/* Impact */}
-            {impact && impact.length > 0 && (
+              {/* Solution */}
               <div className="rounded-xl bg-slate-50 border border-slate-200 px-4 py-4 sm:px-6 sm:py-6">
                 <h2 className="flex items-center gap-1 text-xs sm:text-sm font-semibold uppercase tracking-wide text-slate-700">
-                  <span className="text-blue-600 text-base font-mono">{">_"}</span>
+                  <span className="text-blue-600 text-base font-mono">
+                    {">_"}
+                  </span>
+                  Solution
+                </h2>
+                {solution && (
+                  <p className="mt-2 text-sm sm:text-base leading-relaxed">
+                    <span className="font-semibold text-slate-900">
+                      {splitText(solution).first}.
+                    </span>{" "}
+                    <span className="text-slate-500">
+                      {splitText(solution).rest}
+                    </span>
+                  </p>
+                )}
+              </div>
+
+              {/* Challenges */}
+              {challenges && challenges.length > 0 && (
+                <div className="rounded-xl bg-slate-50 border border-slate-200 px-4 py-4 sm:px-6 sm:py-6">
+                  <h2 className="flex items-center gap-1 text-xs sm:text-sm font-semibold uppercase tracking-wide text-slate-700">
+                    <span className="text-blue-600 text-base font-mono">
+                      {">_"}
+                    </span>
+                    Challenges
+                  </h2>
+                  <ul className="mt-2 space-y-1.5 text-sm sm:text-base leading-relaxed">
+                    {challenges.map((item, index) => {
+                      const { first, rest } = splitText(item);
+                      return (
+                        <li key={index}>
+                          <span className="font-semibold text-slate-900">
+                            {first}.
+                          </span>{" "}
+                          <span className="text-slate-500">{rest}</span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              )}
+            </section>
+
+            {/* Impact — окремий блок, без сірого боксу */}
+            {impact && impact.length > 0 && (
+              <section className="mt-14 sm:mt-16">
+                <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900">
                   Impact
                 </h2>
-                <ul className="mt-2 space-y-1.5 text-sm sm:text-base leading-relaxed text-slate-800">
-                  {impact.map((item, index) => (
-                    <li key={index} className="flex gap-2">
-                      <span className="mt-[6px] h-1.5 w-1.5 rounded-full bg-slate-400 flex-shrink-0" />
-                      <span className="text-slate-500">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-3xl">
+                  Both the initial launch and further iterations delivered
+                  measurable results and created a solid foundation for
+                  long-term, scalable growth.
+                </p>
+
+                <div className="mt-8 grid gap-x-10 gap-y-8 sm:grid-cols-2 md:grid-cols-3">
+                  {impact.map((item, index) => {
+                    const [stat, ...rest] = item.split(" ");
+                    const label = rest.join(" ");
+                    return (
+                      <div key={index} className="space-y-1">
+                        <div className="text-2xl sm:text-3xl font-semibold text-slate-900">
+                          {stat}
+                        </div>
+                        <p className="text-sm sm:text-base text-slate-600">
+                          {label}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+              </section>
             )}
-          </section>
+          </>
         ) : (
           // Coming soon layout
           <section className="mt-10">

@@ -1,186 +1,269 @@
-// src/app/work/provenance/page.tsx
-import type { Metadata } from "next";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
 
-export const metadata: Metadata = {
-  title: "Provenance — Case Study | Iryna Sofiian",
-  description:
-    "Case study: Provenance. Short description of scope, role, outcomes, and product impact.",
-  alternates: { canonical: "/work/provenance" },
+type ProjectConfig = {
+  title: string;
+  subtitle?: string;
+  image?: string;
+  period?: string;
+  tools?: string;
+  keywords?: string;
+  problem?: string;
+  solution?: string;
+  challenges?: string[];
+  impact?: string[];
 };
 
-export default function ProvenancePage() {
+const allocationsCase: ProjectConfig = {
+  title: "Allocations AI engine",
+  subtitle:
+    "Designing an institutional-grade allocation platform that makes complex portfolios clear, navigable, and fast to configure.",
+  image: "/allocations-test.png",
+  period: "2025",
+  tools: "Figma, FigJam",
+  keywords:
+    "FinTech, B2B SaaS, Data visualization, Complex flows",
+  problem:
+    "Unclear Value Proposition. The startup’s original website didn’t clearly show its unique product or explain how it solved user problems.",
+  solution:
+    "Visual Product Walkthrough. Created a three-step 3D animation to show how the product works, making it easy for non-technical users to understand.",
+  challenges: [
+    "Tight Timeline and Team Coordination. Had two months to plan and deliver a large project, including a 3D animation that needed quick client approval.",
+    "Designing intuitive, safe interactions for advanced allocation logic.",
+    "Aligning product, quant, legal and sales on one mental model.",
+  ],
+  impact: [
+    "42% faster allocation decisions in moderated tests.",
+    "Higher completion rate of complex workflows after redesign.",
+    "Clear UX foundation for future AI features across the product suite.",
+  ],
+};
+
+const projects: Record<string, ProjectConfig> = {
+  allocations: allocationsCase,
+  "website-boost": {
+    title: "Marketing Website Optimization",
+    subtitle:
+      "Full case study coming soon. Focused on structure, messaging and experiments that moved revenue.",
+  },
+  flows: {
+    title: "Operational Tools & AI-assisted Flows",
+    subtitle:
+      "Full case study coming soon. Deep dive into complex internal workflows.",
+  },
+};
+
+export function generateStaticParams() {
+  return Object.keys(projects).map((slug) => ({ slug }));
+}
+
+export default async function WorkDetailPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const project = projects[slug];
+
+  if (!project) {
+    notFound();
+  }
+
+  const {
+    title,
+    subtitle,
+    image,
+    period,
+    tools,
+    keywords,
+    problem,
+    solution,
+    challenges,
+    impact,
+  } = project;
+
+  const hasFullCase = Boolean(problem && solution);
+
+  const splitText = (text: string) => {
+    const [first, ...rest] = text.split(". ");
+    return { first, rest: rest.join(". ") };
+  };
+
+  const toolsTags = tools
+    ? tools.split(",").map((t) => t.trim()).filter(Boolean)
+    : [];
+  const keywordTags = keywords
+    ? keywords.split(",").map((t) => t.trim()).filter(Boolean)
+    : [];
+
   return (
-    <main className="min-h-screen bg-white py-16 sm:py-24">
-      {/* Головний консистентний wrapper */}
-      <div className="mx-auto w-full max-w-6xl px-6 lg:px-24">
+    <main className="bg-white">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
         {/* Back link */}
-        <Link
-          href="/work"
-          className="text-sm text-slate-500 hover:text-slate-700 transition"
-        >
-          ← Back to Work
-        </Link>
+        <div className="mb-4">
+          <Link
+            href="/work"
+            className="inline-flex items-center text-xs sm:text-sm text-slate-500 hover:text-slate-900 transition"
+          >
+            ← Back to Work
+          </Link>
+        </div>
+
+        {/* Hero image */}
+        {image && (
+          <div className="relative w-full h-[220px] sm:h-[320px] md:h-[380px] rounded-xl overflow-hidden bg-slate-100">
+            <Image
+              src={image}
+              alt={title}
+              fill
+              className="object-cover"
+              sizes="100vw"
+            />
+          </div>
+        )}
 
         {/* Header */}
-        <header className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight text-slate-900">
-              Provenance
-            </h1>
-            <p className="mt-1 text-sm sm:text-base text-slate-600">
-              Company
+        <header className="mt-8">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-slate-900">
+            {title}
+          </h1>
+          {subtitle && (
+            <p className="mt-3 sm:mt-4 text-sm sm:text-base md:text-lg leading-relaxed text-slate-700">
+              {subtitle}
             </p>
-          </div>
+          )}
 
-          <div className="flex flex-wrap gap-2">
-            <span className="inline-flex items-center rounded-full border border-slate-300 px-3 py-1 text-xs text-slate-600">
-              Domain
-            </span>
-            <span className="inline-flex items-center rounded-full border border-slate-300 px-3 py-1 text-xs text-slate-600">
-              Platform
-            </span>
+          {/* Meta badges */}
+          <div className="mt-5 flex flex-wrap gap-2 text-xs sm:text-sm">
+            {period && (
+              <span className="inline-flex items-center gap-1 rounded-lg border border-slate-200 bg-slate-50 px-3 py-1 text-slate-700">
+                <span>🗓</span>
+                {period}
+              </span>
+            )}
+
+            {toolsTags.map((tag, index) => (
+              <span
+                key={`tool-${index}`}
+                className="inline-flex items-center rounded-lg border border-slate-200 bg-slate-50 px-3 py-1 text-slate-700"
+              >
+                {tag}
+              </span>
+            ))}
+
+            {keywordTags.map((tag, index) => (
+              <span
+                key={`kw-${index}`}
+                className="inline-flex items-center rounded-lg border border-slate-200 bg-slate-50 px-3 py-1 text-slate-700"
+              >
+                {tag}
+              </span>
+            ))}
           </div>
         </header>
 
-        {/* Hero image card */}
-        <section className="mt-10 rounded-3xl border border-slate-200 bg-white overflow-hidden shadow-sm">
-          <Image
-            src="/hero-portrait.jpg" // placeholder, заміниш на скрін продукту
-            alt="Product UI (placeholder)"
-            width={1600}
-            height={900}
-            className="w-full h-auto object-cover"
-          />
-          <p className="px-6 py-3 text-center text-sm text-slate-500 border-t border-slate-100">
-            Product UI (placeholder)
-          </p>
-        </section>
-
-        {/* Summary + meta */}
-        <section className="mt-10 grid grid-cols-1 sm:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] gap-10">
-          <p className="text-sm sm:text-base leading-relaxed text-slate-700">
-            Short description of the project: scope, role, outcomes. Replace
-            this text with the real summary that explains what Provenance is,
-            who it serves, and how your work changed key metrics or workflows.
-          </p>
-
-          <dl className="space-y-3 text-sm text-slate-600">
-            <div>
-              <dt className="font-medium text-slate-900">Period</dt>
-              <dd>2024</dd>
+        {hasFullCase ? (
+          <section className="mt-10 space-y-6 sm:space-y-7">
+            {/* Problem */}
+            <div className="rounded-xl bg-slate-50 border border-slate-200 px-4 py-4 sm:px-6 sm:py-6">
+              <h2 className="flex items-center gap-1 text-xs sm:text-sm font-semibold uppercase tracking-wide text-slate-700">
+                <span className="text-blue-600 text-base font-mono">{">_"}</span>
+                Problem
+              </h2>
+              {problem && (
+                <p className="mt-2 text-sm sm:text-base leading-relaxed">
+                  <span className="font-semibold text-slate-900">
+                    {splitText(problem).first}.
+                  </span>{" "}
+                  <span className="text-slate-500">
+                    {splitText(problem).rest}
+                  </span>
+                </p>
+              )}
             </div>
-            <div>
-              <dt className="font-medium text-slate-900">Role</dt>
-              <dd>Senior Product Designer (end-to-end)</dd>
+
+            {/* Solution */}
+            <div className="rounded-xl bg-slate-50 border border-slate-200 px-4 py-4 sm:px-6 sm:py-6">
+              <h2 className="flex items-center gap-1 text-xs sm:text-sm font-semibold uppercase tracking-wide text-slate-700">
+                <span className="text-blue-600 text-base font-mono">{">_"}</span>
+                Solution
+              </h2>
+              {solution && (
+                <p className="mt-2 text-sm sm:text-base leading-relaxed">
+                  <span className="font-semibold text-slate-900">
+                    {splitText(solution).first}.
+                  </span>{" "}
+                  <span className="text-slate-500">
+                    {splitText(solution).rest}
+                  </span>
+                </p>
+              )}
             </div>
-            <div>
-              <dt className="font-medium text-slate-900">Tools</dt>
-              <dd>Figma, FigJam, Notion, React, Tailwind CSS</dd>
+
+            {/* Challenges */}
+            {challenges && challenges.length > 0 && (
+              <div className="rounded-xl bg-slate-50 border border-slate-200 px-4 py-4 sm:px-6 sm:py-6">
+                <h2 className="flex items-center gap-1 text-xs sm:text-sm font-semibold uppercase tracking-wide text-slate-700">
+                  <span className="text-blue-600 text-base font-mono">{">_"}</span>
+                  Challenges
+                </h2>
+                <ul className="mt-2 space-y-1.5 text-sm sm:text-base leading-relaxed">
+                  {challenges.map((item, index) => {
+                    const { first, rest } = splitText(item);
+                    return (
+                      <li key={index}>
+                        <span className="font-semibold text-slate-900">
+                          {first}.
+                        </span>{" "}
+                        <span className="text-slate-500">{rest}</span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            )}
+
+            {/* Impact */}
+            {impact && impact.length > 0 && (
+              <div className="rounded-xl bg-slate-50 border border-slate-200 px-4 py-4 sm:px-6 sm:py-6">
+                <h2 className="flex items-center gap-1 text-xs sm:text-sm font-semibold uppercase tracking-wide text-slate-700">
+                  <span className="text-blue-600 text-base font-mono">{">_"}</span>
+                  Impact
+                </h2>
+                <ul className="mt-2 space-y-1.5 text-sm sm:text-base leading-relaxed text-slate-800">
+                  {impact.map((item, index) => (
+                    <li key={index} className="flex gap-2">
+                      <span className="mt-[6px] h-1.5 w-1.5 rounded-full bg-slate-400 flex-shrink-0" />
+                      <span className="text-slate-500">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </section>
+        ) : (
+          // Coming soon layout
+          <section className="mt-10">
+            <div className="rounded-xl bg-slate-50 border border-slate-200 px-4 py-5 sm:px-6 sm:py-7">
+              <p className="text-sm sm:text-base leading-relaxed text-slate-800">
+                Full case study for this project is coming soon. If you&apos;d
+                like details now, please{" "}
+                <Link
+                  href="/contact"
+                  className="underline underline-offset-4 decoration-slate-400 hover:decoration-slate-900"
+                >
+                  get in touch
+                </Link>
+                .
+              </p>
             </div>
-            <div>
-              <dt className="font-medium text-slate-900">Keywords</dt>
-              <dd>UX, UI, Design system, Flows, B2B, AI-assisted</dd>
-            </div>
-          </dl>
-        </section>
+          </section>
+        )}
 
-        {/* Problem */}
-        <section className="mt-16 border-t border-slate-200 pt-10">
-          <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-slate-500">
-            &gt;_ Problem
-          </h2>
-          <p className="mt-3 text-sm sm:text-base leading-relaxed text-slate-700">
-            State the key problem succinctly. What blocked users or business
-            outcomes? Describe the friction: data complexity, low adoption,
-            unclear flows, missing trust, or whatever fits your actual case.
-          </p>
-        </section>
-
-        {/* Context & Constraints */}
-        <section className="mt-12">
-          <h2 className="text-base sm:text-lg font-semibold text-slate-900">
-            Context &amp; constraints
-          </h2>
-          <ul className="mt-3 space-y-2 text-sm sm:text-base leading-relaxed text-slate-700 list-disc list-inside">
-            <li>Briefly outline target users and their environment.</li>
-            <li>Mention technical, regulatory, or timeline constraints.</li>
-            <li>
-              Clarify expectations from stakeholders and what “success” meant.
-            </li>
-          </ul>
-        </section>
-
-        {/* Approach / Process */}
-        <section className="mt-12">
-          <h2 className="text-base sm:text-lg font-semibold text-slate-900">
-            Approach
-          </h2>
-          <p className="mt-3 text-sm sm:text-base leading-relaxed text-slate-700">
-            Summarize how you approached the problem. You can mention discovery
-            interviews, mapping existing flows, ideation workshops, quick
-            experiments, or collaboration with engineering and product.
-          </p>
-          <ul className="mt-3 space-y-2 text-sm sm:text-base leading-relaxed text-slate-700 list-disc list-inside">
-            <li>Research steps and key insights.</li>
-            <li>How hypotheses were formed and validated.</li>
-            <li>
-              How you balanced usability, visual clarity, and technical limits.
-            </li>
-          </ul>
-        </section>
-
-        {/* Solution */}
-        <section className="mt-12">
-          <h2 className="text-base sm:text-lg font-semibold text-slate-900">
-            Solution
-          </h2>
-          <p className="mt-3 text-sm sm:text-base leading-relaxed text-slate-700">
-            Describe the final experience: structure, navigation, key screens,
-            interaction patterns, and how they help users achieve their goals
-            faster and with more confidence.
-          </p>
-          <ul className="mt-3 space-y-2 text-sm sm:text-base leading-relaxed text-slate-700 list-disc list-inside">
-            <li>Clarified information hierarchy for complex data.</li>
-            <li>Reduced cognitive load with consistent patterns.</li>
-            <li>
-              Designed states for edge cases, errors, and empty data to keep UX
-              resilient.
-            </li>
-          </ul>
-        </section>
-
-        {/* Impact */}
-        <section className="mt-12">
-          <h2 className="text-base sm:text-lg font-semibold text-slate-900">
-            Impact
-          </h2>
-          <p className="mt-3 text-sm sm:text-base leading-relaxed text-slate-700">
-            Replace these placeholders with real numbers or qualitative
-            outcomes.
-          </p>
-          <ul className="mt-3 space-y-2 text-sm sm:text-base leading-relaxed text-slate-700 list-disc list-inside">
-            <li>↑ Conversion / activation / task completion.</li>
-            <li>↓ Time-to-value or onboarding friction.</li>
-            <li>
-              Feedback from users or stakeholders that proves the new experience
-              works.
-            </li>
-          </ul>
-        </section>
-
-        {/* Learnings / Closing */}
-        <section className="mt-12 mb-8">
-          <h2 className="text-base sm:text-lg font-semibold text-slate-900">
-            What I took from this project
-          </h2>
-          <p className="mt-3 text-sm sm:text-base leading-relaxed text-slate-700">
-            One or two concise reflections: about working with complex systems,
-            collaboration style, or how this case shaped your approach to future
-            B2B / AI-heavy products.
-          </p>
-        </section>
+        <footer className="mt-14 sm:mt-16 border-t border-slate-100 pt-5 text-[10px] sm:text-xs text-slate-500">
+          © 2015–2025 Iryna Sofiian
+        </footer>
       </div>
     </main>
   );

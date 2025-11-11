@@ -2,6 +2,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 
 export default function ProjectShortcuts() {
   return (
@@ -20,30 +21,37 @@ export default function ProjectShortcuts() {
         <div className="mt-10 space-y-8">
           {/* Project 1 */}
           <Link
-            href="/work/provenance"
+            href="/work/allocations"
             className="block rounded-xl border border-slate-200 bg-white p-8 sm:p-10 hover:border-slate-900 transition-colors"
           >
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
               {/* Text */}
               <div>
                 <h3 className="text-lg sm:text-xl font-semibold text-slate-900">
-                  Designing a Gen AI app ecosystem
+                  Allocations AI engine
                 </h3>
                 <p className="mt-3 text-sm sm:text-base leading-relaxed text-slate-700">
-                  Led product &amp; UX for a Gen-AI writing suite — built MVP,
-                  validated flows and scaled onboarding.
+                  Designing an institutional-grade allocation tool that helps
+                  advisors and investors build diversified portfolios with
+                  confidence and speed.
                 </p>
                 <div className="mt-5 flex flex-wrap items-baseline gap-4 text-sm text-slate-600">
                   <span className="text-2xl font-semibold text-slate-900">
-                    70+
+                    +42%
                   </span>
-                  <span>NPS score (world-class)</span>
+                  <span>Faster allocation decisions</span>
                 </div>
               </div>
 
-              {/* Placeholder image */}
-              <div className="h-52 w-full rounded-xl bg-emerald-700/90 flex items-center justify-center text-sm font-medium text-emerald-50">
-                Provenance%20AI
+              {/* Real project image */}
+              <div className="relative h-52 w-full overflow-hidden">
+                <Image
+                  src="/allocations-test.png"
+                  alt="Allocations project preview"
+                  fill
+                  className="object-cover transition-transform duration-500 ease-out hover:scale-[1.03]"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
               </div>
             </div>
           </Link>
@@ -55,7 +63,7 @@ export default function ProjectShortcuts() {
           >
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
               {/* Placeholder image */}
-              <div className="h-52 w-full rounded-xl bg-amber-800/90 flex items-center justify-center text-sm font-medium text-amber-50">
+              <div className="h-52 w-full bg-amber-800/90 flex items-center justify-center text-sm font-medium text-amber-50">
                 Website
               </div>
 

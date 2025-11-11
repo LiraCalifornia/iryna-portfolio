@@ -22,7 +22,7 @@ const familyPhotos = [
   {
     src: "/me-with-marshal.jpg",
     alt: "Iryna with Marshal",
-    caption: "Evening walks with Marshal",
+    caption: "Walks with Marshal",
   },
   {
     src: "/me-with-maiko.jpeg",
@@ -36,9 +36,7 @@ const familyPhotos = [
   },
 ];
 
-// Фото для мозайки в блоці Work
-// 1-а фотка — велика плитка 2x2 зліва зверху,
-// решта — стандартні квадрати навколо.
+
 const mosaicPhotos = [
   {
     src: "/about-1.jpg",
@@ -73,7 +71,7 @@ export default function AboutPage() {
       <div className="mx-auto w-full max-w-6xl px-6 lg:px-24 py-24">
         <div className="max-w-3xl">
           {/* HERO */}
-          <header className="mb-24">
+          <header className="mb-20">
             <h1 className="mb-6 text-5xl font-bold tracking-tight text-slate-900">
               About Iryna Sofiian
             </h1>
@@ -86,8 +84,8 @@ export default function AboutPage() {
           </header>
 
           {/* STORY */}
-          <section className="mb-24">
-            <h2 className="mb-6 text-2xl font-semibold text-slate-900">
+          <section className="mb-20">
+            <h2 className="mb-4 text-2xl font-semibold text-slate-900">
               Story
             </h2>
             <div className="space-y-5 text-base leading-7 text-slate-700">
@@ -113,8 +111,8 @@ export default function AboutPage() {
           </section>
 
           {/* WORK + МОЗАЙКА */}
-          <section className="mb-24">
-            <h2 className="mb-6 text-2xl font-semibold text-slate-900">
+          <section className="mb-20">
+            <h2 className="mb-4 text-2xl font-semibold text-slate-900">
               Work
             </h2>
             <div className="space-y-5 text-base leading-7 text-slate-700">
@@ -139,7 +137,7 @@ export default function AboutPage() {
             {/* Мозайка всередині Work */}
             <div
               className="
-                mt-6 grid gap-3
+                mt-6 grid gap-4
                 grid-cols-2 grid-rows-3
                 sm:grid-cols-3 sm:grid-rows-3
                 md:grid-cols-3 md:grid-rows-3
@@ -172,23 +170,22 @@ export default function AboutPage() {
           </section>
 
           {/* FAMILY */}
-          <section className="mb-24">
-            <h2 className="mb-6 text-2xl font-semibold text-slate-900">
+          <section className="mb-20">
+            <h2 className="mb-4 text-2xl font-semibold text-slate-900">
               Family
             </h2>
-            <p className="mb-10 text-base leading-7 text-slate-700">
+            <p className="mb-8 text-base leading-7 text-slate-700">
               There are three of us: two imperfect humans and one perfect dog —
               Marshal. Our home is the cozy, safe place that gives balance and
               strength. I’m deeply grateful to Lyubomyr for unwavering support.
             </p>
 
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
               {familyPhotos.map(({ src, alt, caption }) => (
                 <figure
                   key={src}
-                  className="rounded-none border border-slate-200 bg-white"
                 >
-                  <div className="overflow-hidden rounded-t-none">
+                  <div className="overflow-hidden">
                     <Image
                       src={src}
                       alt={alt}
@@ -207,7 +204,7 @@ export default function AboutPage() {
           </section>
 
           {/* VALUES */}
-          <section className="mb-24">
+          <section className="mb-20">
             <h2 className="mb-8 text-2xl font-semibold text-slate-900">
               Values
             </h2>
@@ -243,8 +240,8 @@ export default function AboutPage() {
           </section>
 
           {/* FIND ME */}
-          <section className="mb-24">
-            <h2 className="mb-6 text-2xl font-semibold text-slate-900">
+          <section className="mb-20">
+            <h2 className="mb-4 text-2xl font-semibold text-slate-900">
               Find me
             </h2>
             <ul className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">

@@ -12,7 +12,7 @@ export default function ProjectShortcuts() {
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
           Featured work
         </p>
-        <h2 className="mt-2 text-3xl sm:text-4xl font-semibold tracking-tight text-slate-900">
+        <h2 className="mt-2 text-xl sm:text-4xl font-semibold tracking-tight text-slate-900">
           Design that gets results
         </h2>
 
@@ -21,7 +21,7 @@ export default function ProjectShortcuts() {
           {/* Project 1 */}
           <Link
             href="/work/provenance"
-            className="block rounded-3xl border border-slate-200 bg-white p-8 sm:p-10 shadow-sm hover:shadow-md transition-shadow"
+            className="block rounded-xl border border-slate-200 bg-white p-8 sm:p-10 hover:border-slate-900 transition-colors"
           >
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
               {/* Text */}
@@ -42,7 +42,7 @@ export default function ProjectShortcuts() {
               </div>
 
               {/* Placeholder image */}
-              <div className="h-52 w-full rounded-2xl bg-emerald-700/90 flex items-center justify-center text-sm font-medium text-emerald-50">
+              <div className="h-52 w-full rounded-xl bg-emerald-700/90 flex items-center justify-center text-sm font-medium text-emerald-50">
                 Provenance%20AI
               </div>
             </div>
@@ -51,11 +51,11 @@ export default function ProjectShortcuts() {
           {/* Project 2 */}
           <Link
             href="/work/website-boost"
-            className="block rounded-3xl border border-slate-200 bg-white p-8 sm:p-10 shadow-sm hover:shadow-md transition-shadow"
+            className="block rounded-xl border border-slate-200 bg-white p-8 sm:p-10 hover:border-slate-900 transition-colors"
           >
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
               {/* Placeholder image */}
-              <div className="h-52 w-full rounded-2xl bg-amber-800/90 flex items-center justify-center text-sm font-medium text-amber-50">
+              <div className="h-52 w-full rounded-xl bg-amber-800/90 flex items-center justify-center text-sm font-medium text-amber-50">
                 Website
               </div>
 
@@ -81,7 +81,7 @@ export default function ProjectShortcuts() {
           {/* Project 3 */}
           <Link
             href="/work/flows"
-            className="block rounded-3xl border border-slate-200 bg-white p-8 sm:p-10 shadow-sm hover:shadow-md transition-shadow"
+            className="block rounded-xl border border-slate-200 bg-white p-8 sm:p-10 hover:border-slate-900 transition-colors"
           >
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
               {/* Text */}

@@ -108,7 +108,7 @@ export default function Hero() {
             className="lg:col-span-5"
           >
             <div className="relative mx-auto w-full max-w-md">
-              <div className="relative overflow-hidden rounded-2xl bg-white shadow-sm">
+              <div className="relative overflow-hidden rounded-xl bg-white shadow-sm">
                 <Image
                   src="/hero-portrait.jpg"
                   alt="Iryna Sofiian portrait"

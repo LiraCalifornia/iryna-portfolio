@@ -1,6 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { use } from "react";
+
+/* ---------- Types ---------- */
 
 type ProjectConfig = {
   title: string;
@@ -15,6 +18,13 @@ type ProjectConfig = {
   impact?: string[];
 };
 
+// У Next 15 params є Promise — типізуємо відповідно
+type PageProps = {
+  params: Promise<{ slug: string }>;
+};
+
+/* ---------- Projects data ---------- */
+
 const allocationsCase: ProjectConfig = {
   title: "Allocations AI engine",
   subtitle:
@@ -22,8 +32,7 @@ const allocationsCase: ProjectConfig = {
   image: "/allocations-test.png",
   period: "2025",
   tools: "Figma, FigJam",
-  keywords:
-    "FinTech, B2B SaaS, Data visualization, Complex flows",
+  keywords: "FinTech, B2B SaaS, Data visualization, Complex flows",
   problem:
     "Unclear Value Proposition. The startup’s original website didn’t clearly show its unique product or explain how it solved user problems.",
   solution:
@@ -40,30 +49,66 @@ const allocationsCase: ProjectConfig = {
   ],
 };
 
-const projects: Record<string, ProjectConfig> = {
-  allocations: allocationsCase,
-  "website-boost": {
-    title: "Marketing Website Optimization",
-    subtitle:
-      "Full case study coming soon. Focused on structure, messaging and experiments that moved revenue.",
-  },
-  flows: {
-    title: "Operational Tools & AI-assisted Flows",
-    subtitle:
-      "Full case study coming soon. Deep dive into complex internal workflows.",
-  },
+const websiteBoostCase: ProjectConfig = {
+  title: "Website that boosted startup revenue",
+  subtitle:
+    "Rebuilt and optimized marketing site — improved acquisition and conversion through continuous experiments.",
+  image: "/educator-test.png",
+  period: "2024",
+  tools: "Figma, Webflow, Google Analytics, Hotjar",
+  keywords: "Marketing website, Conversion, Experimentation, UX writing",
+  problem:
+    "Low Conversion from Existing Traffic. The startup had strong organic and paid traffic, but the old website did not clearly communicate value or guide visitors to sign up.",
+  solution:
+    "Focused Narrative & Experiment Framework. Reworked structure and messaging, highlighted proof points, and set up an experiment backlog for continuous A/B testing.",
+  challenges: [
+    "Balancing modern visual style with clarity and performance.",
+    "Preserving SEO equity while restructuring pages and content.",
+    "Aligning founders, marketing, and engineering around one clear story.",
+  ],
+  impact: [
+    "$250k+ Worth of organic traffic generated.",
+    "1554% Increase in monthly organic search traffic in 8 months.",
+    "66% Increase in signup conversion rate.",
+    "70+ NPS score maintained after redesign.",
+  ],
 };
 
+const flowsPlaceholder: ProjectConfig = {
+  title: "Operational tools & AI-assisted flows",
+  subtitle:
+    "Full case study coming soon. Deep dive into complex internal workflows.",
+};
+
+const projects: Record<string, ProjectConfig> = {
+  allocations: allocationsCase,
+  "website-boost": websiteBoostCase,
+  flows: flowsPlaceholder,
+};
+
+/* ---------- Route segment config ---------- */
+
+// Пререндеримо відомі слаги (щоб у проді не було 404)
 export function generateStaticParams() {
   return Object.keys(projects).map((slug) => ({ slug }));
 }
 
-export default async function WorkDetailPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
-  const { slug } = await params;
+// Дозволяємо динаміку для інших випадків (не обов’язково, але безпечно)
+export const dynamicParams = true;
+
+/* ---------- Helpers ---------- */
+
+const splitText = (text: string) => {
+  const [first, ...rest] = text.split(". ");
+  return { first, rest: rest.join(". ") };
+};
+
+/* ---------- Page ---------- */
+
+export default function WorkDetailPage(props: PageProps) {
+  // розгортаємо асинхронний params
+  const { slug } = use(props.params);
+
   const project = projects[slug];
 
   if (!project) {
@@ -85,17 +130,8 @@ export default async function WorkDetailPage({
 
   const hasFullCase = Boolean(problem && solution);
 
-  const splitText = (text: string) => {
-    const [first, ...rest] = text.split(". ");
-    return { first, rest: rest.join(". ") };
-  };
-
-  const toolsTags = tools
-    ? tools.split(",").map((t) => t.trim()).filter(Boolean)
-    : [];
-  const keywordTags = keywords
-    ? keywords.split(",").map((t) => t.trim()).filter(Boolean)
-    : [];
+  const toolsTags = tools ? tools.split(",").map((t) => t.trim()).filter(Boolean) : [];
+  const keywordTags = keywords ? keywords.split(",").map((t) => t.trim()).filter(Boolean) : [];
 
   return (
     <main className="bg-white">
@@ -113,13 +149,7 @@ export default async function WorkDetailPage({
         {/* Hero image */}
         {image && (
           <div className="relative w-full h-[220px] sm:h-[320px] md:h-[380px] rounded-xl overflow-hidden bg-slate-100">
-            <Image
-              src={image}
-              alt={title}
-              fill
-              className="object-cover"
-              sizes="100vw"
-            />
+            <Image src={image} alt={title} fill className="object-cover" sizes="100vw" />
           </div>
         )}
 
@@ -129,7 +159,7 @@ export default async function WorkDetailPage({
             {title}
           </h1>
           {subtitle && (
-            <p className="mt-3 sm:mt-4 text-sm sm:text-base md:text-lg leading-relaxed text-slate-700">
+            <p className="mt-3 sm:mt-4 text-sm sm:text-base leading-relaxed text-slate-600">
               {subtitle}
             </p>
           )}
@@ -168,52 +198,42 @@ export default async function WorkDetailPage({
             {/* Problem / Solution / Challenges */}
             <section className="mt-10 space-y-6 sm:space-y-7">
               {/* Problem */}
-              <div className="rounded-xl bg-slate-50 border border-slate-200 px-4 py-4 sm:px-6 sm:py-6">
-                <h2 className="flex items-center gap-1 text-xs sm:text-sm font-semibold uppercase tracking-wide text-slate-700">
-                  <span className="text-blue-600 text-base font-mono">
-                    {">_"}
-                  </span>
-                  Problem
-                </h2>
-                {problem && (
+              {problem && (
+                <div className="rounded-xl bg-slate-50 border border-slate-200 px-4 py-4 sm:px-6 sm:py-6">
+                  <h2 className="flex items-center gap-1 text-xs sm:text-sm font-semibold uppercase tracking-wide text-slate-700">
+                    <span className="text-blue-600 text-base font-mono">{">_"}</span>
+                    Problem
+                  </h2>
                   <p className="mt-2 text-sm sm:text-base leading-relaxed">
                     <span className="font-semibold text-slate-900">
                       {splitText(problem).first}.
                     </span>{" "}
-                    <span className="text-slate-500">
-                      {splitText(problem).rest}
-                    </span>
+                    <span className="text-slate-600">{splitText(problem).rest}</span>
                   </p>
-                )}
-              </div>
+                </div>
+              )}
 
               {/* Solution */}
-              <div className="rounded-xl bg-slate-50 border border-slate-200 px-4 py-4 sm:px-6 sm:py-6">
-                <h2 className="flex items-center gap-1 text-xs sm:text-sm font-semibold uppercase tracking-wide text-slate-700">
-                  <span className="text-blue-600 text-base font-mono">
-                    {">_"}
-                  </span>
-                  Solution
-                </h2>
-                {solution && (
+              {solution && (
+                <div className="rounded-xl bg-slate-50 border border-slate-200 px-4 py-4 sm:px-6 sm:py-6">
+                  <h2 className="flex items-center gap-1 text-xs sm:text-sm font-semibold uppercase tracking-wide text-slate-700">
+                    <span className="text-blue-600 text-base font-mono">{">_"}</span>
+                    Solution
+                  </h2>
                   <p className="mt-2 text-sm sm:text-base leading-relaxed">
                     <span className="font-semibold text-slate-900">
                       {splitText(solution).first}.
                     </span>{" "}
-                    <span className="text-slate-500">
-                      {splitText(solution).rest}
-                    </span>
+                    <span className="text-slate-600">{splitText(solution).rest}</span>
                   </p>
-                )}
-              </div>
+                </div>
+              )}
 
               {/* Challenges */}
               {challenges && challenges.length > 0 && (
                 <div className="rounded-xl bg-slate-50 border border-slate-200 px-4 py-4 sm:px-6 sm:py-6">
                   <h2 className="flex items-center gap-1 text-xs sm:text-sm font-semibold uppercase tracking-wide text-slate-700">
-                    <span className="text-blue-600 text-base font-mono">
-                      {">_"}
-                    </span>
+                    <span className="text-blue-600 text-base font-mono">{">_"}</span>
                     Challenges
                   </h2>
                   <ul className="mt-2 space-y-1.5 text-sm sm:text-base leading-relaxed">
@@ -221,10 +241,8 @@ export default async function WorkDetailPage({
                       const { first, rest } = splitText(item);
                       return (
                         <li key={index}>
-                          <span className="font-semibold text-slate-900">
-                            {first}.
-                          </span>{" "}
-                          <span className="text-slate-500">{rest}</span>
+                          <span className="font-semibold text-slate-900">{first}.</span>{" "}
+                          <span className="text-slate-600">{rest}</span>
                         </li>
                       );
                     })}
@@ -233,13 +251,13 @@ export default async function WorkDetailPage({
               )}
             </section>
 
-            {/* Impact — окремий блок, без сірого боксу */}
+            {/* Impact */}
             {impact && impact.length > 0 && (
               <section className="mt-14 sm:mt-16">
                 <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900">
                   Impact
                 </h2>
-                <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-3xl">
+                <p className="mt-3 text-sm sm:text-base leading-relaxed text-slate-600 max-w-3xl">
                   Both the initial launch and further iterations delivered
                   measurable results and created a solid foundation for
                   long-term, scalable growth.
@@ -254,7 +272,7 @@ export default async function WorkDetailPage({
                         <div className="text-2xl sm:text-3xl font-semibold text-slate-900">
                           {stat}
                         </div>
-                        <p className="text-sm sm:text-base text-slate-600">
+                        <p className="text-sm sm:text-base leading-relaxed text-slate-600">
                           {label}
                         </p>
                       </div>
@@ -265,12 +283,12 @@ export default async function WorkDetailPage({
             )}
           </>
         ) : (
-          // Coming soon layout
+          // Coming soon
           <section className="mt-10">
             <div className="rounded-xl bg-slate-50 border border-slate-200 px-4 py-5 sm:px-6 sm:py-7">
-              <p className="text-sm sm:text-base leading-relaxed text-slate-800">
-                Full case study for this project is coming soon. If you&apos;d
-                like details now, please{" "}
+              <p className="text-sm sm:text-base leading-relaxed text-slate-600">
+                Full case study for this project is coming soon. If you&apos;d like details
+                now, please{" "}
                 <Link
                   href="/contact"
                   className="underline underline-offset-4 decoration-slate-400 hover:decoration-slate-900"

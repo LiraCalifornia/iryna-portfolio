@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 
@@ -19,9 +20,22 @@ export default function SiteNav() {
         <nav className="flex h-16 items-center justify-between">
           {/* Logo + name */}
           <Link href="/" aria-label="Home" className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-[11px] font-semibold text-white">
-              IS
+            <div className="relative h-9 w-9 overflow-hidden rounded-full">
+              {/* fallback-плашка під фото */}
+              <div className="absolute inset-0 flex items-center justify-center bg-slate-900 text-[11px] font-semibold text-white">
+                IS
+              </div>
+              {/* саме фото (якщо /public/avatar.jpg існує — воно перекриє fallback) */}
+              <Image
+                src="/avatar.jpg"
+                alt="Iryna Sofiian"
+                fill
+                sizes="36px"
+                className="object-cover"
+                priority
+              />
             </div>
+
             <span className="text-[17px] font-medium tracking-tight text-slate-900">
               Iryna Sofiian
             </span>
@@ -31,16 +45,15 @@ export default function SiteNav() {
           <ul className="flex items-center gap-8 text-sm font-medium">
             {links.map(({ href, label }) => {
               const isActive = pathname === href;
-
               return (
                 <li key={href} className="relative">
                   <Link
                     href={href}
-                    className={`transition-colors ${
+                    className={
                       isActive
-                        ? "text-slate-900"
-                        : "text-slate-600 hover:text-slate-900"
-                    }`}
+                        ? "transition-colors text-slate-900"
+                        : "transition-colors text-slate-600 hover:text-slate-900"
+                    }
                   >
                     {label}
                   </Link>

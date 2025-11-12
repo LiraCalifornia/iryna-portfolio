@@ -1,3 +1,4 @@
+// src/components/ProjectShortcuts.tsx
 "use client";
 
 import Link from "next/link";
@@ -17,13 +18,26 @@ export default function ProjectShortcuts() {
 
         {/* Список проектів */}
         <div className="mt-10 space-y-8">
-          {/* Project 1: Allocations */}
+
+          {/* Project 1: Allocations — image left on desktop */}
           <Link
             href="/work/allocations"
             className="block rounded-xl border border-slate-200 bg-white p-8 sm:p-10 hover:border-slate-900 transition-colors"
           >
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-              <div>
+              {/* Image — мобайл завжди зверху, на десктопі ліворуч */}
+              <div className="order-1 lg:order-1 relative w-full overflow-hidden rounded-xl aspect-[16/9]">
+                <Image
+                  src="/allocations-test.png"
+                  alt="Allocations project preview"
+                  fill
+                  className="object-cover transition-transform duration-500 ease-out hover:scale-[1.03]"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
+
+              {/* Text */}
+              <div className="order-2 lg:order-2">
                 <h3 className="text-lg sm:text-xl font-semibold text-slate-900">
                   Allocations AI engine
                 </h3>
@@ -33,33 +47,21 @@ export default function ProjectShortcuts() {
                   configure.
                 </p>
                 <div className="mt-5 flex flex-wrap items-baseline gap-4 text-sm text-slate-600">
-                  <span className="text-2xl font-semibold text-slate-900">
-                    +42%
-                  </span>
+                  <span className="text-2xl font-semibold text-slate-900">+42%</span>
                   <span>Faster allocation decisions</span>
                 </div>
-              </div>
-
-              <div className="relative h-52 w-full overflow-hidden rounded-xl">
-                <Image
-                  src="/allocations-test.png"
-                  alt="Allocations project preview"
-                  fill
-                  className="object-cover transition-transform duration-500 ease-out hover:scale-[1.03]"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
               </div>
             </div>
           </Link>
 
-          {/* Project 2: Website that boosted startup revenue */}
+          {/* Project 2: Website boost — image right on desktop */}
           <Link
             href="/work/website-boost"
             className="block rounded-xl border border-slate-200 bg-white p-8 sm:p-10 hover:border-slate-900 transition-colors"
           >
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-              {/* Image */}
-              <div className="relative h-52 w-full overflow-hidden rounded-xl">
+              {/* Image — мобайл зверху, на десктопі праворуч */}
+              <div className="order-1 lg:order-2 relative w-full overflow-hidden rounded-xl aspect-[16/9]">
                 <Image
                   src="/educator-test.png"
                   alt="Website that boosted startup revenue — project preview"
@@ -69,8 +71,8 @@ export default function ProjectShortcuts() {
                 />
               </div>
 
-              {/* Text */}
-              <div>
+              {/* Text — на десктопі ліворуч */}
+              <div className="order-2 lg:order-1">
                 <h3 className="text-lg sm:text-xl font-semibold text-slate-900">
                   Website that boosted startup revenue
                 </h3>
@@ -79,22 +81,26 @@ export default function ProjectShortcuts() {
                   and conversion through continuous experiments.
                 </p>
                 <div className="mt-5 flex flex-wrap items-baseline gap-4 text-sm text-slate-600">
-                  <span className="text-2xl font-semibold text-slate-900">
-                    $250k+
-                  </span>
+                  <span className="text-2xl font-semibold text-slate-900">$250k+</span>
                   <span>Worth of organic traffic</span>
                 </div>
               </div>
             </div>
           </Link>
 
-          {/* Project 3: Flows (placeholder) */}
+          {/* Project 3: Flows — image left on desktop (заглушка) */}
           <Link
             href="/work/flows"
             className="block rounded-xl border border-slate-200 bg-white p-8 sm:p-10 hover:border-slate-900 transition-colors"
           >
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-              <div>
+              {/* Image placeholder — мобайл зверху, на десктопі ліворуч */}
+              <div className="order-1 lg:order-1 relative w-full overflow-hidden rounded-xl aspect-[16/9] bg-slate-100 flex items-center justify-center">
+                <span className="text-slate-400 text-sm">Image coming soon</span>
+              </div>
+
+              {/* Text */}
+              <div className="order-2 lg:order-2">
                 <h3 className="text-lg sm:text-xl font-semibold text-slate-900">
                   Operational tools &amp; AI-assisted flows
                 </h3>
@@ -102,14 +108,14 @@ export default function ProjectShortcuts() {
                   Selected case studies on complex internal tools, workflows,
                   permissions and AI-assisted operations.
                 </p>
-              </div>
-
-              <div className="flex items-center gap-3 justify-start lg:justify-end text-sm text-slate-600">
-                <span className="inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-                <span>Full case study coming soon</span>
+                <div className="flex items-center gap-3 justify-start text-sm text-slate-600 mt-5">
+                  <span className="inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                  <span>Full case study coming soon</span>
+                </div>
               </div>
             </div>
           </Link>
+
         </div>
       </div>
     </section>

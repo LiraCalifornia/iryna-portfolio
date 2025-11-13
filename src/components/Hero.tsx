@@ -3,7 +3,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Linkedin, Activity } from "lucide-react";
+import { Linkedin, Activity, MapPin } from "lucide-react"; // 👈 додано MapPin
 
 const MAILTO =
   "mailto:irasofiian@gmail.com" +
@@ -27,11 +27,12 @@ export default function Hero() {
           <div className="w-full max-w-[720px]">
             {/* tags */}
             <div className="flex flex-wrap gap-2 mb-6">
-              <span className="inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs text-slate-700">
+              <span className="inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-sm text-slate-700 tracking-[0.01em]">
                 Open to EU remote & hybrid
               </span>
-              <span className="inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs text-slate-700">
-                Vienna • CET
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-sm text-slate-700 tracking-[0.01em]">
+                <MapPin size={14} strokeWidth={1.75} className="text-slate-600" />
+                Vienna
               </span>
             </div>
 
@@ -46,7 +47,7 @@ export default function Hero() {
             </h1>
 
             {/* Supporting paragraph */}
-            <p className="mt-5 text-slate-600 text-base sm:text-lg leading-relaxed max-w-prose">
+            <p className="mt-5 text-slate-600 text-base sm:text-lg leading-relaxed tracking-[0.01em] max-w-prose">
               I design calm, conversion-driven product experiences for data-dense
               B2B SaaS & FinTech. Focused on clarity, usability, and measurable
               impact for complex products.
@@ -59,7 +60,7 @@ export default function Hero() {
             <div className="mt-6 flex flex-wrap items-center gap-3">
               <a
                 href={MAILTO}
-                className="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-4 py-2.5 text-white text-sm font-medium hover:bg-slate-800 transition-all"
+                className="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-4 py-2.5 text-white text-sm font-medium hover:bg-slate-800 transition-all tracking-[0.01em]"
               >
                 Send email <span className="text-lg leading-none">↗</span>
               </a>

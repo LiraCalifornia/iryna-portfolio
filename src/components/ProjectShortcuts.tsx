@@ -28,15 +28,14 @@ export default function ProjectShortcuts() {
             className="block rounded-xl border border-slate-200 bg-white p-[40px] hover:border-slate-900 transition-colors"
           >
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-
-              {/* IMAGE — max width 280px */}
-              <div className="order-1 lg:order-1 relative w-full max-w-[280px] overflow-hidden rounded-xl aspect-[16/9]">
+              {/* IMAGE — full width on mobile, max 280px on desktop */}
+              <div className="order-1 lg:order-1 relative w-full lg:max-w-[280px] overflow-hidden rounded-xl aspect-[16/9]">
                 <Image
                   src="/allocations-test.png"
                   alt="Allocations project preview"
                   fill
                   className="object-cover transition-transform duration-500 ease-out hover:scale-[1.03]"
-                  sizes="280px"
+                  sizes="(max-width: 1024px) 100vw, 280px"
                 />
               </div>
 
@@ -69,15 +68,14 @@ export default function ProjectShortcuts() {
             className="block rounded-xl border border-slate-200 bg-white p-[40px] hover:border-slate-900 transition-colors"
           >
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-
-              {/* IMAGE RIGHT — max 280px */}
-              <div className="order-1 lg:order-2 relative w-full max-w-[280px] overflow-hidden rounded-xl aspect-[16/9]">
+              {/* IMAGE RIGHT — full width on mobile, max 280px on desktop */}
+              <div className="order-1 lg:order-2 relative w-full lg:max-w-[280px] overflow-hidden rounded-xl aspect-[16/9]">
                 <Image
                   src="/educator-test.png"
                   alt="Website that boosted startup revenue — project preview"
                   fill
                   className="object-cover transition-transform duration-500 ease-out hover:scale-[1.03]"
-                  sizes="280px"
+                  sizes="(max-width: 1024px) 100vw, 280px"
                 />
               </div>
 
@@ -110,9 +108,8 @@ export default function ProjectShortcuts() {
             className="block rounded-xl border border-slate-200 bg-white p-[40px] hover:border-slate-900 transition-colors"
           >
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-
-              {/* PLACEHOLDER IMAGE */}
-              <div className="order-1 lg:order-1 relative w-full max-w-[280px] overflow-hidden rounded-xl aspect-[16/9] bg-slate-100 flex items-center justify-center">
+              {/* PLACEHOLDER IMAGE — full width on mobile, max 280px on desktop */}
+              <div className="order-1 lg:order-1 relative w-full lg:max-w-[280px] overflow-hidden rounded-xl aspect-[16/9] bg-slate-100 flex items-center justify-center">
                 <span className="text-slate-400 text-[16px] leading-[24px]">
                   Image coming soon
                 </span>

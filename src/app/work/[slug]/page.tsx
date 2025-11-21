@@ -18,7 +18,6 @@ type ProjectConfig = {
   impact?: string[];
 };
 
-// У Next 15 params є Promise — типізуємо відповідно
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
@@ -88,12 +87,9 @@ const projects: Record<string, ProjectConfig> = {
 
 /* ---------- Route segment config ---------- */
 
-// Пререндеримо відомі слаги (щоб у проді не було 404)
 export function generateStaticParams() {
   return Object.keys(projects).map((slug) => ({ slug }));
 }
-
-// Дозволяємо динаміку для інших випадків (не обов’язково, але безпечно)
 export const dynamicParams = true;
 
 /* ---------- Helpers ---------- */
@@ -106,14 +102,9 @@ const splitText = (text: string) => {
 /* ---------- Page ---------- */
 
 export default function WorkDetailPage(props: PageProps) {
-  // розгортаємо асинхронний params
   const { slug } = use(props.params);
-
   const project = projects[slug];
-
-  if (!project) {
-    notFound();
-  }
+  if (!project) notFound();
 
   const {
     title,
@@ -129,7 +120,6 @@ export default function WorkDetailPage(props: PageProps) {
   } = project;
 
   const hasFullCase = Boolean(problem && solution);
-
   const toolsTags = tools ? tools.split(",").map((t) => t.trim()).filter(Boolean) : [];
   const keywordTags = keywords ? keywords.split(",").map((t) => t.trim()).filter(Boolean) : [];
 
@@ -140,7 +130,7 @@ export default function WorkDetailPage(props: PageProps) {
         <div className="mb-4">
           <Link
             href="/work"
-            className="inline-flex items-center text-xs sm:text-sm text-slate-500 hover:text-slate-900 transition"
+            className="inline-flex items-center text-sm text-slate-500 hover:text-slate-900 transition tracking-[0.01em]"
           >
             ← Back to Work
           </Link>
@@ -159,15 +149,15 @@ export default function WorkDetailPage(props: PageProps) {
             {title}
           </h1>
           {subtitle && (
-            <p className="mt-3 sm:mt-4 text-sm sm:text-base leading-relaxed text-slate-600">
+            <p className="mt-3 sm:mt-4 text-sm sm:text-base leading-relaxed text-slate-600 tracking-[0.01em] text-[14px]">
               {subtitle}
             </p>
           )}
 
           {/* Meta badges */}
-          <div className="mt-5 flex flex-wrap gap-2 text-xs sm:text-sm">
+          <div className="mt-5 flex flex-wrap gap-2 text-sm">
             {period && (
-              <span className="inline-flex items-center gap-1 rounded-lg border border-slate-200 bg-slate-50 px-3 py-1 text-slate-700">
+              <span className="inline-flex items-center gap-1 rounded-lg border border-slate-200 bg-slate-50 px-3 py-1 text-slate-700 tracking-[0.01em] text-[14px]">
                 <span>🗓</span>
                 {period}
               </span>
@@ -176,7 +166,7 @@ export default function WorkDetailPage(props: PageProps) {
             {toolsTags.map((tag, index) => (
               <span
                 key={`tool-${index}`}
-                className="inline-flex items-center rounded-lg border border-slate-200 bg-slate-50 px-3 py-1 text-slate-700"
+                className="inline-flex items-center rounded-lg border border-slate-200 bg-slate-50 px-3 py-1 text-slate-700 tracking-[0.01em] text-[14px]"
               >
                 {tag}
               </span>
@@ -185,7 +175,7 @@ export default function WorkDetailPage(props: PageProps) {
             {keywordTags.map((tag, index) => (
               <span
                 key={`kw-${index}`}
-                className="inline-flex items-center rounded-lg border border-slate-200 bg-slate-50 px-3 py-1 text-slate-700"
+                className="inline-flex items-center rounded-lg border border-slate-200 bg-slate-50 px-3 py-1 text-slate-700 tracking-[0.01em] text-[14px]"
               >
                 {tag}
               </span>
@@ -200,11 +190,11 @@ export default function WorkDetailPage(props: PageProps) {
               {/* Problem */}
               {problem && (
                 <div className="rounded-xl bg-slate-50 border border-slate-200 px-4 py-4 sm:px-6 sm:py-6">
-                  <h2 className="flex items-center gap-1 text-xs sm:text-sm font-semibold uppercase tracking-wide text-slate-700">
+                  <h2 className="flex items-center gap-1 text-sm font-semibold uppercase tracking-wide text-slate-700">
                     <span className="text-blue-600 text-base font-mono">{">_"}</span>
                     Problem
                   </h2>
-                  <p className="mt-2 text-sm sm:text-base leading-relaxed">
+                  <p className="mt-2 text-base leading-relaxed tracking-[0.01em] text-[14px]">
                     <span className="font-semibold text-slate-900">
                       {splitText(problem).first}.
                     </span>{" "}
@@ -216,11 +206,11 @@ export default function WorkDetailPage(props: PageProps) {
               {/* Solution */}
               {solution && (
                 <div className="rounded-xl bg-slate-50 border border-slate-200 px-4 py-4 sm:px-6 sm:py-6">
-                  <h2 className="flex items-center gap-1 text-xs sm:text-sm font-semibold uppercase tracking-wide text-slate-700">
+                  <h2 className="flex items-center gap-1 text-sm font-semibold uppercase tracking-wide text-slate-700">
                     <span className="text-blue-600 text-base font-mono">{">_"}</span>
                     Solution
                   </h2>
-                  <p className="mt-2 text-sm sm:text-base leading-relaxed">
+                  <p className="mt-2 text-base leading-relaxed tracking-[0.01em] text-[14px]">
                     <span className="font-semibold text-slate-900">
                       {splitText(solution).first}.
                     </span>{" "}
@@ -232,11 +222,11 @@ export default function WorkDetailPage(props: PageProps) {
               {/* Challenges */}
               {challenges && challenges.length > 0 && (
                 <div className="rounded-xl bg-slate-50 border border-slate-200 px-4 py-4 sm:px-6 sm:py-6">
-                  <h2 className="flex items-center gap-1 text-xs sm:text-sm font-semibold uppercase tracking-wide text-slate-700">
+                  <h2 className="flex items-center gap-1 text-sm font-semibold uppercase tracking-wide text-slate-700">
                     <span className="text-blue-600 text-base font-mono">{">_"}</span>
                     Challenges
                   </h2>
-                  <ul className="mt-2 space-y-1.5 text-sm sm:text-base leading-relaxed">
+                  <ul className="mt-2 space-y-1.5 text-base leading-relaxed tracking-[0.01em] text-[14px]">
                     {challenges.map((item, index) => {
                       const { first, rest } = splitText(item);
                       return (
@@ -257,10 +247,9 @@ export default function WorkDetailPage(props: PageProps) {
                 <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900">
                   Impact
                 </h2>
-                <p className="mt-3 text-sm sm:text-base leading-relaxed text-slate-600 max-w-3xl">
-                  Both the initial launch and further iterations delivered
-                  measurable results and created a solid foundation for
-                  long-term, scalable growth.
+                <p className="mt-3 text-base leading-relaxed text-slate-600 tracking-[0.01em] text-[14px] max-w-3xl">
+                  Both the initial launch and further iterations delivered measurable
+                  results and created a solid foundation for long-term, scalable growth.
                 </p>
 
                 <div className="mt-8 grid gap-x-10 gap-y-8 sm:grid-cols-2 md:grid-cols-3">
@@ -272,7 +261,7 @@ export default function WorkDetailPage(props: PageProps) {
                         <div className="text-2xl sm:text-3xl font-semibold text-slate-900">
                           {stat}
                         </div>
-                        <p className="text-sm sm:text-base leading-relaxed text-slate-600">
+                        <p className="text-base leading-relaxed text-slate-600 tracking-[0.01em] text-[14px]">
                           {label}
                         </p>
                       </div>
@@ -283,12 +272,11 @@ export default function WorkDetailPage(props: PageProps) {
             )}
           </>
         ) : (
-          // Coming soon
           <section className="mt-10">
             <div className="rounded-xl bg-slate-50 border border-slate-200 px-4 py-5 sm:px-6 sm:py-7">
-              <p className="text-sm sm:text-base leading-relaxed text-slate-600">
-                Full case study for this project is coming soon. If you&apos;d like details
-                now, please{" "}
+              <p className="text-base leading-relaxed text-slate-600 tracking-[0.01em] text-[14px]">
+                Full case study for this project is coming soon. If you&apos;d like
+                details now, please{" "}
                 <Link
                   href="/contact"
                   className="underline underline-offset-4 decoration-slate-400 hover:decoration-slate-900"
@@ -301,7 +289,7 @@ export default function WorkDetailPage(props: PageProps) {
           </section>
         )}
 
-        <footer className="mt-14 sm:mt-16 border-t border-slate-100 pt-5 text-[10px] sm:text-xs text-slate-500">
+        <footer className="mt-14 sm:mt-16 border-t border-slate-100 pt-5 text-[12px] text-slate-500 tracking-[0.01em]">
           © 2015–2025 Iryna Sofiian
         </footer>
       </div>

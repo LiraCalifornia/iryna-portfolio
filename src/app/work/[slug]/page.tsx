@@ -3,6 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { use } from "react";
+import {
+  DesignProcess,
+  type DesignProcessStep,
+} from "@/components/DesignProcess";
 
 /* ---------- Types ---------- */
 
@@ -17,6 +21,7 @@ type ProjectConfig = {
   solution?: string;
   challenges?: string[];
   impact?: string[];
+  designProcessSteps?: DesignProcessStep[];
 };
 
 type PageProps = {
@@ -24,6 +29,26 @@ type PageProps = {
 };
 
 /* ---------- Projects data ---------- */
+
+const allocationsDesignProcess: DesignProcessStep[] = [
+  {
+    title: "Insurance story begins",
+    description:
+      "The journey begins when I became an insurance agent. I quickly saw the imperfections in the industry, with agents often prioritizing their profits over the client's best interests. This led me to develop a personal annuities quoting system that would offer transparency and fairness.",
+    // заміни шлях на свій реальний файл у /public
+    image: "/design-process/insurance-story-begins.jpg",
+  },
+  {
+    title: "The Birth of AnnuitiesGenius",
+    description:
+      "The idea to share this fair and transparent annuities system with the entire industry was born. Agata Global Tech LLC was registered, the team was assembled, and the first prototype of AnnuitiesGenius was created.",
+  },
+  {
+    title: "Launch & Early Adoption",
+    description:
+      "The vision started to materialize. The first version (V1.0) of the AnnuitiesGenius platform was launched, bringing transparency to annuity recommendations. By the end of the year, approximately 50 agents were using the system, helping ensure fair annuity choices for clients.",
+  },
+];
 
 const allocationsCase: ProjectConfig = {
   title: "Allocations AI engine",
@@ -47,6 +72,7 @@ const allocationsCase: ProjectConfig = {
     "Higher completion rate of complex workflows after redesign.",
     "Clear UX foundation for future AI features across the product suite.",
   ],
+  designProcessSteps: allocationsDesignProcess,
 };
 
 const websiteBoostCase: ProjectConfig = {
@@ -72,6 +98,7 @@ const websiteBoostCase: ProjectConfig = {
     "66% Increase in signup conversion rate.",
     "70+ NPS score maintained after redesign.",
   ],
+  // designProcessSteps можна буде додати пізніше, зараз секція не показується
 };
 
 const flowsPlaceholder: ProjectConfig = {
@@ -118,6 +145,7 @@ export default function WorkDetailPage(props: PageProps) {
     solution,
     challenges,
     impact,
+    designProcessSteps,
   } = project;
 
   const hasFullCase = Boolean(problem && solution);
@@ -239,7 +267,7 @@ export default function WorkDetailPage(props: PageProps) {
                         <span className="font-semibold text-slate-900">
                           {first}.
                         </span>{" "}
-                          {rest}
+                        {rest}
                       </p>
                     );
                   })()}
@@ -310,6 +338,11 @@ export default function WorkDetailPage(props: PageProps) {
                 })}
               </div>
             </section>
+
+            {/* Design Process — останній блок перед футером */}
+            {designProcessSteps && designProcessSteps.length > 0 && (
+              <DesignProcess steps={designProcessSteps} />
+            )}
           </>
         ) : (
           <section className="mt-16">

@@ -45,26 +45,26 @@ export function DesignProcess({
       </header>
 
       {/* Кроки */}
-      <div className="divide-y divide-slate-200">
+      <div>
         {steps.map((step, index) => {
           const number = step.id ?? index + 1;
           const isFirst = index === 0;
+          const onlyTextBlock = !step.image;
+          const isLast = index === steps.length - 1;
 
           return (
             <article
               key={number}
-              className="group flex gap-6 md:gap-10 py-10 md:py-12"
+              className="group flex gap-6 md:gap-10 py-0 md:py-0"
             >
               {/* Ліва колонка з таймлайном */}
               <div className="flex w-[88px] items-stretch">
-                {/* Коло з номером (48×48) */}
+                {/* Коло з номером (48×48) з відступом 26px зверху */}
                 <div className="mt-[26px] flex-shrink-0">
                   <div
                     className={clsx(
                       "flex h-12 w-12 items-center justify-center rounded-full border text-[16px] leading-[24px] font-medium transition-colors",
-                      // default state
                       "border-slate-200 bg-white text-slate-900",
-                      // hover state
                       "group-hover:border-slate-900 group-hover:bg-slate-900 group-hover:text-white"
                     )}
                   >
@@ -72,9 +72,9 @@ export function DesignProcess({
                   </div>
                 </div>
 
-                {/* Права частина таймлайна: лінії + мале коло */}
+                {/* Вертикальна лінія + мале коло */}
                 <div className="ml-3 flex flex-1 flex-col items-center">
-                  {/* Верхня лінія 36px: прозора для першого елемента, сіра для решти */}
+                  {/* Верхня лінія (прозора для першого елемента) */}
                   <div
                     className={clsx(
                       "w-[2px] h-9",
@@ -82,7 +82,7 @@ export function DesignProcess({
                     )}
                   />
 
-                  {/* Малий індикатор (28×28) з внутрішнім колом 12×12 */}
+                  {/* Малий індикатор */}
                   <div className="flex h-7 w-7 items-center justify-center rounded-full border border-slate-200 bg-white transition-colors group-hover:border-slate-900 group-hover:bg-slate-900">
                     <div className="h-3 w-3 rounded-full bg-slate-900 transition-colors group-hover:bg-white" />
                   </div>
@@ -93,7 +93,7 @@ export function DesignProcess({
               </div>
 
               {/* Права контентна частина */}
-              <div className="flex-1">
+              <div className="flex-1 mt-[26px]">
                 {/* H4: 32/40 */}
                 <h3 className="font-semibold tracking-tight text-slate-900 text-[32px] leading-[40px]">
                   {step.title}
@@ -104,6 +104,7 @@ export function DesignProcess({
                   {step.description}
                 </p>
 
+                {/* Якщо є картинка — показуємо картку */}
                 {step.image && (
                   <div className="mt-10">
                     <div className="overflow-hidden rounded-2xl border border-slate-200 bg-slate-50/40">
@@ -115,6 +116,14 @@ export function DesignProcess({
                         className="h-auto w-full object-cover"
                       />
                     </div>
+                  </div>
+                )}
+
+                {/* Якщо блок тільки текстовий і НЕ останній → лінія + 48px вниз */}
+                {onlyTextBlock && !isLast && (
+                  <div className="mt-12">
+                    <div className="h-[1px] w-full bg-slate-200" />
+                    <div className="mt-12" />
                   </div>
                 )}
               </div>

@@ -17,7 +17,6 @@ export const metadata: Metadata = {
   },
 };
 
-// Фото для сімейного блоку
 const familyPhotos = [
   {
     src: "/me-with-marshal.jpg",
@@ -37,31 +36,12 @@ const familyPhotos = [
 ];
 
 const mosaicPhotos = [
-  {
-    src: "/about-1.jpg",
-    alt: "Workshop moment",
-    span: "md:col-span-2 md:row-span-2",
-  },
-  {
-    src: "/about-2.jpg",
-    alt: "Team collaboration",
-  },
-  {
-    src: "/about-3.jpg",
-    alt: "Sticky notes & structure",
-  },
-  {
-    src: "/about-4.jpg",
-    alt: "Quiet observation",
-  },
-  {
-    src: "/about-5.jpg",
-    alt: "Speaking & facilitation",
-  },
-  {
-    src: "/about-6.jpg",
-    alt: "Another fragment from worklife",
-  },
+  { src: "/about-1.jpg", alt: "Workshop moment", span: "md:col-span-2 md:row-span-2" },
+  { src: "/about-2.jpg", alt: "Team collaboration" },
+  { src: "/about-3.jpg", alt: "Sticky notes & structure" },
+  { src: "/about-4.jpg", alt: "Quiet observation" },
+  { src: "/about-5.jpg", alt: "Speaking & facilitation" },
+  { src: "/about-6.jpg", alt: "Another fragment from worklife" },
 ];
 
 export default function AboutPage() {
@@ -69,14 +49,12 @@ export default function AboutPage() {
     <main className="bg-white">
       <div className="mx-auto w-full max-w-6xl px-6 lg:px-24 py-24">
         <div className="max-w-3xl">
+
           {/* HERO */}
           <header className="mb-20">
-            {/* H2 48/56 */}
             <h1 className="mb-6 font-semibold tracking-tight text-slate-900 text-[48px] leading-[56px]">
               About Iryna Sofiian
             </h1>
-
-            {/* Subtitle 4, custom line-height 40 — тягнеться на всю ширину 768 */}
             <p className="text-slate-700 text-[24px] leading-[40px]">
               My design is, first and foremost, about solving problems for users
               and for business. That alone determines my methods and tools,
@@ -87,24 +65,20 @@ export default function AboutPage() {
 
           {/* STORY */}
           <section className="mb-20">
-            {/* H5 24/36 */}
             <h2 className="mb-4 font-semibold text-slate-900 text-[24px] leading-[36px]">
               Story
             </h2>
 
-            {/* Один p + розриви через <br /><br /> */}
             <p className="text-slate-700 text-[20px] leading-[36px]">
               I was born in 1994 in Lviv, Ukraine, with a clear sense that I
               wanted to solve people’s problems not only efficiently, but
               beautifully. That’s how I began exploring design.
-              <br />
-              <br />
+              <br /><br />
               I first studied interior design for two years, but soon realized
               it wasn’t my path. Then I turned to print and graphic design,
               which became my formal education. While studying, I discovered the
               world of digital products and started learning interface design.
-              <br />
-              <br />
+              <br /><br />
               Fate brought me together with programmers, and during my first
               year I was immersed in code. By graduation I was already creating
               Android and iOS apps, then moved into web products. That
@@ -112,35 +86,25 @@ export default function AboutPage() {
             </p>
           </section>
 
-          {/* WORK + МОЗАЙКА */}
+          {/* WORK */}
           <section className="mb-20">
-            {/* H5 24/36 */}
             <h2 className="mb-4 font-semibold text-slate-900 text-[24px] leading-[36px]">
               Work
             </h2>
 
-            {/* Один p + розрив всередині */}
             <p className="text-slate-700 text-[20px] leading-[36px]">
               The key value I bring is a broad kaleidoscope of experience. I’ve
               practiced many well-known frameworks and learned that lots of them
               are beautiful theory. There are no perfect companies for perfect
               methodologies.
-              <br />
-              <br />
+              <br /><br />
               I’ve developed flexible, effective ways to solve problems —
               through design and beyond it. AI has transformed the process, yet
               real experience remains the foundation while AI is the catalyst.
             </p>
 
-            {/* Мозайка всередині Work */}
-            <div
-              className="
-                mt-6 grid gap-4
-                grid-cols-2 grid-rows-3
-                sm:grid-cols-3 sm:grid-rows-3
-                md:grid-cols-3 md:grid-rows-3
-              "
-            >
+            {/* MOSAIC */}
+            <div className="mt-6 grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-3">
               {mosaicPhotos.map((photo, index) => (
                 <div
                   key={photo.src}
@@ -151,9 +115,7 @@ export default function AboutPage() {
                     index === 0
                       ? "col-span-2 row-span-2 sm:col-span-2 sm:row-span-2 md:col-span-2 md:row-span-2"
                       : "",
-                  ]
-                    .filter(Boolean)
-                    .join(" ")}
+                  ].join(" ")}
                 >
                   <Image
                     src={photo.src}
@@ -166,7 +128,7 @@ export default function AboutPage() {
               ))}
             </div>
 
-            {/* Caption під мозайкою — text M */}
+            {/* MOSAIC caption – text M */}
             <p className="mt-3 text-center text-slate-500 text-[16px] leading-[24px]">
               A small mosaic of moments that shape how I work and facilitate
             </p>
@@ -174,7 +136,6 @@ export default function AboutPage() {
 
           {/* FAMILY */}
           <section className="mb-20">
-            {/* H5 24/36 */}
             <h2 className="mb-4 font-semibold text-slate-900 text-[24px] leading-[36px]">
               Family
             </h2>
@@ -198,7 +159,9 @@ export default function AboutPage() {
                       sizes="(min-width: 640px) 33vw, 100vw"
                     />
                   </div>
-                  <figcaption className="px-3 py-2 text-center text-slate-600 text-[13px] leading-[20px]">
+
+                  {/* FIGCAPTION → text M + mt-3 (12px) */}
+                  <figcaption className="mt-3 text-center text-[16px] leading-[24px] text-slate-600">
                     {caption}
                   </figcaption>
                 </figure>
@@ -208,45 +171,68 @@ export default function AboutPage() {
 
           {/* VALUES */}
           <section className="mb-20">
-            {/* H5 24/36 */}
             <h2 className="mb-8 font-semibold text-slate-900 text-[24px] leading-[36px]">
               Values
             </h2>
 
-            <ul className="grid gap-4">
-              <li className="rounded-none border border-slate-200 p-5">
-                <h3 className="mb-2 font-semibold text-slate-900 text-[20px] leading-[32px]">
-                  People
-                </h3>
-                <p className="text-slate-700 text-[16px] leading-[24px]">
-                  Users, businesses, technologies — all are about people. I
-                  start by listening and understanding.
+            <div className="space-y-4">
+
+              {/* PEOPLE */}
+              <div className="rounded-2xl bg-slate-50 border border-slate-200 px-10 py-5">
+                <p className="mb-[10px] flex items-center">
+                  <span className="mr-2 text-[16px] leading-[24px] font-semibold text-blue-600">
+                    &gt;_
+                  </span>
+                  <span className="text-[13px] leading-[20px] tracking-[0.18em] font-semibold uppercase text-slate-500">
+                    People
+                  </span>
                 </p>
-              </li>
-              <li className="rounded-none border border-slate-200 p-5">
-                <h3 className="mb-2 font-semibold text-slate-900 text-[20px] leading-[32px]">
-                  Continuous Learning
-                </h3>
-                <p className="text-slate-700 text-[16px] leading-[24px]">
-                  Tools and methods must adapt. Today’s AI trick may be
-                  irrelevant tomorrow. Problems evolve.
+
+                <p className="text-[20px] leading-[32px] text-slate-900">
+                  <strong className="font-semibold">Users, businesses, technologies</strong>{" "}
+                  — all are about people. I start by listening and understanding.
                 </p>
-              </li>
-              <li className="rounded-none border border-slate-200 p-5">
-                <h3 className="mb-2 font-semibold text-slate-900 text-[20px] leading-[32px]">
-                  Partnership
-                </h3>
-                <p className="text-slate-700 text-[16px] leading-[24px]">
-                  The best work comes when you care like an owner. All-in or not
-                  at all.
+              </div>
+
+              {/* CONTINUOUS LEARNING */}
+              <div className="rounded-2xl bg-slate-50 border border-slate-200 px-10 py-5">
+                <p className="mb-[10px] flex items-center">
+                  <span className="mr-2 text-[16px] leading-[24px] font-semibold text-blue-600">
+                    &gt;_
+                  </span>
+                  <span className="text-[13px] leading-[20px] tracking-[0.18em] font-semibold uppercase text-slate-500">
+                    Continuous Learning
+                  </span>
                 </p>
-              </li>
-            </ul>
+
+                <p className="text-[20px] leading-[32px] text-slate-900">
+                  <strong className="font-semibold">Tools and methods must adapt.</strong>{" "}
+                  Today’s AI trick may be irrelevant tomorrow. Problems evolve.
+                </p>
+              </div>
+
+              {/* PARTNERSHIP */}
+              <div className="rounded-2xl bg-slate-50 border border-slate-200 px-10 py-5">
+                <p className="mb-[10px] flex items-center">
+                  <span className="mr-2 text-[16px] leading-[24px] font-semibold text-blue-600">
+                    &gt;_
+                  </span>
+                  <span className="text-[13px] leading-[20px] tracking-[0.18em] font-semibold uppercase text-slate-500">
+                    Partnership
+                  </span>
+                </p>
+
+                <p className="text-[20px] leading-[32px] text-slate-900">
+                  <strong className="font-semibold">The best work comes when you care like an owner.</strong>{" "}
+                  All-in or not at all.
+                </p>
+              </div>
+
+            </div>
           </section>
 
           {/* FIND ME */}
           <section className="mb-20">
-            {/* H5 24/36 */}
             <h2 className="mb-4 font-semibold text-slate-900 text-[24px] leading-[36px]">
               Find me
             </h2>
@@ -291,6 +277,7 @@ export default function AboutPage() {
           <footer className="border-t border-slate-200 pt-6 text-slate-500 text-[13px] leading-[20px]">
             © 2015–2025 Iryna Sofiian
           </footer>
+
         </div>
       </div>
     </main>

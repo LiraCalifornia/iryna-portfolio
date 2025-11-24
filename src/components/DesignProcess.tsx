@@ -104,9 +104,9 @@ export function DesignProcess({
                   {step.description}
                 </p>
 
-                {/* Якщо є картинка — показуємо картку */}
+                {/* Якщо є картинка — картка + додатковий падінг донизу для неостаннього блоку */}
                 {step.image && (
-                  <div className="mt-10">
+                  <div className={clsx("mt-10", !isLast && "pb-10")}>
                     <div className="overflow-hidden rounded-2xl border border-slate-200 bg-slate-50/40">
                       <Image
                         src={step.image}
@@ -119,7 +119,7 @@ export function DesignProcess({
                   </div>
                 )}
 
-                {/* Якщо блок тільки текстовий і НЕ останній → лінія + 48px вниз */}
+                {/* Якщо блок тільки текстовий і НЕ останній → дивайдер + 48px вниз */}
                 {onlyTextBlock && !isLast && (
                   <div className="mt-12">
                     <div className="h-[1px] w-full bg-slate-200" />

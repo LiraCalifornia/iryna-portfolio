@@ -36,7 +36,6 @@ const familyPhotos = [
   },
 ];
 
-
 const mosaicPhotos = [
   {
     src: "/about-1.jpg",
@@ -72,10 +71,13 @@ export default function AboutPage() {
         <div className="max-w-3xl">
           {/* HERO */}
           <header className="mb-20">
-            <h1 className="mb-6 text-5xl font-bold tracking-tight text-slate-900">
+            {/* H2 48/56 */}
+            <h1 className="mb-6 font-semibold tracking-tight text-slate-900 text-[48px] leading-[56px]">
               About Iryna Sofiian
             </h1>
-            <p className="max-w-2xl text-lg leading-relaxed text-slate-700">
+
+            {/* Subtitle 4, custom line-height 40 — тягнеться на всю ширину 768 */}
+            <p className="text-slate-700 text-[24px] leading-[40px]">
               My design is, first and foremost, about solving problems for users
               and for business. That alone determines my methods and tools,
               never the other way around. I adapt to corporations, startups, and
@@ -85,54 +87,50 @@ export default function AboutPage() {
 
           {/* STORY */}
           <section className="mb-20">
-            <h2 className="mb-4 text-2xl font-semibold text-slate-900">
+            {/* H5 24/36 */}
+            <h2 className="mb-4 font-semibold text-slate-900 text-[24px] leading-[36px]">
               Story
             </h2>
-            <div className="space-y-5 text-base leading-7 text-slate-700">
-              <p>
-                I was born in 1994 in Lviv, Ukraine, with a clear sense that I
-                wanted to solve people’s problems not only efficiently, but
-                beautifully. That’s how I began exploring design.
-              </p>
-              <p>
-                I first studied interior design for two years, but soon realized
-                it wasn’t my path. Then I turned to print and graphic design,
-                which became my formal education. While studying, I discovered
-                the world of digital products and started learning interface
-                design.
-              </p>
-              <p>
-                Fate brought me together with programmers, and during my first
-                year I was immersed in code. By graduation I was already
-                creating Android and iOS apps, then moved into web products.
-                That enthusiasm became a strong foundation.
-              </p>
-            </div>
+
+            {/* Один p + розриви через <br /><br /> */}
+            <p className="text-slate-700 text-[20px] leading-[36px]">
+              I was born in 1994 in Lviv, Ukraine, with a clear sense that I
+              wanted to solve people’s problems not only efficiently, but
+              beautifully. That’s how I began exploring design.
+              <br />
+              <br />
+              I first studied interior design for two years, but soon realized
+              it wasn’t my path. Then I turned to print and graphic design,
+              which became my formal education. While studying, I discovered the
+              world of digital products and started learning interface design.
+              <br />
+              <br />
+              Fate brought me together with programmers, and during my first
+              year I was immersed in code. By graduation I was already creating
+              Android and iOS apps, then moved into web products. That
+              enthusiasm became a strong foundation.
+            </p>
           </section>
 
           {/* WORK + МОЗАЙКА */}
           <section className="mb-20">
-            <h2 className="mb-4 text-2xl font-semibold text-slate-900">
+            {/* H5 24/36 */}
+            <h2 className="mb-4 font-semibold text-slate-900 text-[24px] leading-[36px]">
               Work
             </h2>
-            <div className="space-y-5 text-base leading-7 text-slate-700">
-              <p>
-                The key value I bring is a broad kaleidoscope of experience.
-                I’ve practiced many well-known frameworks and learned that lots
-                of them are beautiful theory. There are no perfect companies for
-                perfect methodologies.
-              </p>
-              <p>
-                I’ve developed flexible, effective ways to solve problems —
-                through design and beyond it. AI has transformed the process,
-                yet real experience remains the foundation while AI is the
-                catalyst.
-              </p>
-              <p className="text-sm text-slate-500">
-                Below is a small mosaic of moments that shape how I work,
-                facilitate, and notice patterns inside teams and products.
-              </p>
-            </div>
+
+            {/* Один p + розрив всередині */}
+            <p className="text-slate-700 text-[20px] leading-[36px]">
+              The key value I bring is a broad kaleidoscope of experience. I’ve
+              practiced many well-known frameworks and learned that lots of them
+              are beautiful theory. There are no perfect companies for perfect
+              methodologies.
+              <br />
+              <br />
+              I’ve developed flexible, effective ways to solve problems —
+              through design and beyond it. AI has transformed the process, yet
+              real experience remains the foundation while AI is the catalyst.
+            </p>
 
             {/* Мозайка всередині Work */}
             <div
@@ -147,11 +145,12 @@ export default function AboutPage() {
                 <div
                   key={photo.src}
                   className={[
-                    "relative overflow-hidden rounded-none bg-slate-100",
+                    "relative overflow-hidden bg-slate-100",
                     "min-h-[90px] sm:min-h-[110px] md:min-h-[140px]",
                     photo.span ?? "",
-                    // на мобайлі — без span'ів, всі просто йдуть послідовно
-                    index === 0 ? "col-span-2 row-span-2 sm:col-span-2 sm:row-span-2 md:col-span-2 md:row-span-2" : "",
+                    index === 0
+                      ? "col-span-2 row-span-2 sm:col-span-2 sm:row-span-2 md:col-span-2 md:row-span-2"
+                      : "",
                   ]
                     .filter(Boolean)
                     .join(" ")}
@@ -160,21 +159,27 @@ export default function AboutPage() {
                     src={photo.src}
                     alt={photo.alt}
                     fill
-                    // auto-size + scale всередині контейнера
                     className="object-cover transition-transform duration-500 ease-out hover:scale-[1.03]"
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 33vw"
                   />
                 </div>
               ))}
             </div>
+
+            {/* Caption під мозайкою — text M */}
+            <p className="mt-3 text-center text-slate-500 text-[16px] leading-[24px]">
+              A small mosaic of moments that shape how I work and facilitate
+            </p>
           </section>
 
           {/* FAMILY */}
           <section className="mb-20">
-            <h2 className="mb-4 text-2xl font-semibold text-slate-900">
+            {/* H5 24/36 */}
+            <h2 className="mb-4 font-semibold text-slate-900 text-[24px] leading-[36px]">
               Family
             </h2>
-            <p className="mb-8 text-base leading-7 text-slate-700">
+
+            <p className="mb-8 text-slate-700 text-[20px] leading-[36px]">
               There are three of us: two imperfect humans and one perfect dog —
               Marshal. Our home is the cozy, safe place that gives balance and
               strength. I’m deeply grateful to Lyubomyr for unwavering support.
@@ -182,9 +187,7 @@ export default function AboutPage() {
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
               {familyPhotos.map(({ src, alt, caption }) => (
-                <figure
-                  key={src}
-                >
+                <figure key={src}>
                   <div className="overflow-hidden">
                     <Image
                       src={src}
@@ -195,7 +198,7 @@ export default function AboutPage() {
                       sizes="(min-width: 640px) 33vw, 100vw"
                     />
                   </div>
-                  <figcaption className="px-3 py-2 text-center text-sm text-slate-600">
+                  <figcaption className="px-3 py-2 text-center text-slate-600 text-[13px] leading-[20px]">
                     {caption}
                   </figcaption>
                 </figure>
@@ -205,33 +208,35 @@ export default function AboutPage() {
 
           {/* VALUES */}
           <section className="mb-20">
-            <h2 className="mb-8 text-2xl font-semibold text-slate-900">
+            {/* H5 24/36 */}
+            <h2 className="mb-8 font-semibold text-slate-900 text-[24px] leading-[36px]">
               Values
             </h2>
+
             <ul className="grid gap-4">
               <li className="rounded-none border border-slate-200 p-5">
-                <h3 className="mb-2 text-lg font-semibold text-slate-900">
+                <h3 className="mb-2 font-semibold text-slate-900 text-[20px] leading-[32px]">
                   People
                 </h3>
-                <p className="text-base leading-7 text-slate-700">
+                <p className="text-slate-700 text-[16px] leading-[24px]">
                   Users, businesses, technologies — all are about people. I
                   start by listening and understanding.
                 </p>
               </li>
               <li className="rounded-none border border-slate-200 p-5">
-                <h3 className="mb-2 text-lg font-semibold text-slate-900">
+                <h3 className="mb-2 font-semibold text-slate-900 text-[20px] leading-[32px]">
                   Continuous Learning
                 </h3>
-                <p className="text-base leading-7 text-slate-700">
+                <p className="text-slate-700 text-[16px] leading-[24px]">
                   Tools and methods must adapt. Today’s AI trick may be
                   irrelevant tomorrow. Problems evolve.
                 </p>
               </li>
               <li className="rounded-none border border-slate-200 p-5">
-                <h3 className="mb-2 text-lg font-semibold text-slate-900">
+                <h3 className="mb-2 font-semibold text-slate-900 text-[20px] leading-[32px]">
                   Partnership
                 </h3>
-                <p className="text-base leading-7 text-slate-700">
+                <p className="text-slate-700 text-[16px] leading-[24px]">
                   The best work comes when you care like an owner. All-in or not
                   at all.
                 </p>
@@ -241,14 +246,16 @@ export default function AboutPage() {
 
           {/* FIND ME */}
           <section className="mb-20">
-            <h2 className="mb-4 text-2xl font-semibold text-slate-900">
+            {/* H5 24/36 */}
+            <h2 className="mb-4 font-semibold text-slate-900 text-[24px] leading-[36px]">
               Find me
             </h2>
+
             <ul className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
               <li>
                 <Link
                   href="https://www.linkedin.com/in/iryna-sofiian/"
-                  className="block rounded-none border border-slate-200 p-4 hover:bg-slate-50"
+                  className="block rounded-none border border-slate-200 p-4 text-slate-800 text-[16px] leading-[24px] hover:bg-slate-50"
                 >
                   LinkedIn
                 </Link>
@@ -256,7 +263,7 @@ export default function AboutPage() {
               <li>
                 <Link
                   href="https://www.strava.com/athletes/32493473"
-                  className="block rounded-none border border-slate-200 p-4 hover:bg-slate-50"
+                  className="block rounded-none border border-slate-200 p-4 text-slate-800 text-[16px] leading-[24px] hover:bg-slate-50"
                 >
                   Strava
                 </Link>
@@ -264,7 +271,7 @@ export default function AboutPage() {
               <li>
                 <Link
                   href="https://www.instagram.com/sofiian.iryna/"
-                  className="block rounded-none border border-slate-200 p-4 hover:bg-slate-50"
+                  className="block rounded-none border border-slate-200 p-4 text-slate-800 text-[16px] leading-[24px] hover:bg-slate-50"
                 >
                   Instagram
                 </Link>
@@ -272,7 +279,7 @@ export default function AboutPage() {
               <li>
                 <Link
                   href="https://www.facebook.com/iryna.sofiyan"
-                  className="block rounded-none border border-slate-200 p-4 hover:bg-slate-50"
+                  className="block rounded-none border border-slate-200 p-4 text-slate-800 text-[16px] leading-[24px] hover:bg-slate-50"
                 >
                   Facebook
                 </Link>
@@ -281,7 +288,7 @@ export default function AboutPage() {
           </section>
 
           {/* FOOTER */}
-          <footer className="border-t border-slate-200 pt-6 text-sm text-slate-500">
+          <footer className="border-t border-slate-200 pt-6 text-slate-500 text-[13px] leading-[20px]">
             © 2015–2025 Iryna Sofiian
           </footer>
         </div>

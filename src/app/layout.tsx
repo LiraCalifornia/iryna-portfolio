@@ -1,13 +1,15 @@
 // src/app/layout.tsx
+
 import type { Metadata } from "next";
 import "./globals.css";
-import SiteNav from "@/components/SiteNav"; 
+import SiteNav from "@/components/SiteNav";
+import { PageContainer } from "@/components/PageContainer";
 import { Plus_Jakarta_Sans } from "next/font/google";
 
 const plusJakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"], 
-  weight: ["400", "500", "600", "700"], 
-  variable: "--font-plus-jakarta", 
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-plus-jakarta",
 });
 
 const siteUrl = "https://iryna-portfolio.vercel.app";
@@ -57,9 +59,14 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
+
       <body className="bg-white text-neutral-900 antialiased">
-        <SiteNav />            
-        {children}
+        <SiteNav />
+
+        {/* GLOBAL LAYOUT CONTAINER */}
+        <PageContainer>
+          {children}
+        </PageContainer>
       </body>
     </html>
   );

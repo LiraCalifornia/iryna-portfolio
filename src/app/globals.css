@@ -1,19 +1,44 @@
 /* src/app/globals.css */
+
 @import "tailwindcss";
+
+/* ---------- CSS Variables ---------- */
 
 :root {
   --background: #ffffff;
-  --foreground: #0f172a; 
+  --foreground: #0f172a;
 }
 
+/* ---------- Tailwind Theme (Tailwind v4) ---------- */
+/* Тут ми задаємо всі твої кастомні токени:
+   • кольори
+   • фон
+   • шрифти
+   • брейкпоінти (нові!)
+*/
+
 @theme inline {
+  /* Кольори */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  /* Шрифт */
   --font-sans: var(--font-plus-jakarta);
+
+  /* ---------- Кастомні брейкпоінти для ВСЬОГО сайту ---------- */
+  /* Tailwind v4 вимагає rem:
+     756px  = 47.25rem
+     896px  = 56rem
+  */
+  --breakpoint-bp-756: 47.25rem;
+  --breakpoint-bp-896: 56rem;
 }
+
+/* ---------- Base styles ---------- */
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, Arial, Helvetica, sans-serif;
+  font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, Arial,
+    Helvetica, sans-serif;
 }

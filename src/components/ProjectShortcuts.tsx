@@ -6,9 +6,30 @@ import Image from "next/image";
 
 export default function ProjectShortcuts() {
   return (
-    <section className="bg-slate-50 pt-[64px] pb-20">
-      {/* MAIN CONTAINER — центрований, max 768 */}
-      <div className="mx-auto w-full max-w-[768px] px-0">
+    /* FULL-BLEED SECTION */
+    <section
+      className="
+        bg-slate-50 
+        pt-[64px] pb-20
+
+        relative left-1/2 right-1/2
+        -ml-[50vw] -mr-[50vw] 
+        w-screen
+      "
+    >
+      {/* INNER CONTAINER (centered, max 768px) */}
+      <div
+        className="
+          mx-auto 
+          w-full 
+          max-w-[768px]
+
+          px-4           /* mobile */
+          bp-756:px-6    /* tablet */
+          bp-896:px-0    /* desktop */
+
+        "
+      >
 
         {/* HEADER */}
         <p className="text-[13px] leading-[20px] font-semibold uppercase tracking-[0.16em] text-slate-500">
@@ -28,7 +49,7 @@ export default function ProjectShortcuts() {
             className="block rounded-xl border border-slate-200 bg-white p-[40px] hover:border-slate-900 transition-colors"
           >
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-              {/* IMAGE — full width on mobile, max 280px on desktop */}
+              {/* IMAGE */}
               <div className="order-1 lg:order-1 relative w-full lg:max-w-[280px] overflow-hidden rounded-xl aspect-[16/9]">
                 <Image
                   src="/allocations-test.png"
@@ -68,7 +89,8 @@ export default function ProjectShortcuts() {
             className="block rounded-xl border border-slate-200 bg-white p-[40px] hover:border-slate-900 transition-colors"
           >
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-              {/* IMAGE RIGHT — full width on mobile, max 280px on desktop */}
+
+              {/* IMAGE RIGHT */}
               <div className="order-1 lg:order-2 relative w-full lg:max-w-[280px] overflow-hidden rounded-xl aspect-[16/9]">
                 <Image
                   src="/educator-test.png"
@@ -108,7 +130,8 @@ export default function ProjectShortcuts() {
             className="block rounded-xl border border-slate-200 bg-white p-[40px] hover:border-slate-900 transition-colors"
           >
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-              {/* PLACEHOLDER IMAGE — full width on mobile, max 280px on desktop */}
+
+              {/* PLACEHOLDER IMAGE */}
               <div className="order-1 lg:order-1 relative w-full lg:max-w-[280px] overflow-hidden rounded-xl aspect-[16/9] bg-slate-100 flex items-center justify-center">
                 <span className="text-slate-400 text-[16px] leading-[24px]">
                   Image coming soon

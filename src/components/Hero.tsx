@@ -22,7 +22,7 @@ export default function Hero() {
   return (
     <section className="bg-white">
       {/* Загальний контейнер сторінки */}
-      <div className="mx-auto w-full max-w-7xl px-6 lg:px-24 py-16 sm:py-20">
+      <div className="mx-auto w-full max-w-7xl px-6 lg:px-0 py-16 sm:py-20">
         {/* Hero-блок: центрований, max 768px */}
         <div className="mx-auto max-w-[768px] flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10 lg:gap-16">
           {/* LEFT: текстовий блок max 524px */}

@@ -3,122 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { use } from "react";
-import {
-  DesignProcess,
-  type DesignProcessStep,
-} from "@/components/DesignProcess";
+import { DesignProcess } from "@/components/DesignProcess";
+import { projects, type ProjectConfig } from "@/data/projects";
 
 /* ---------- Types ---------- */
-
-type ProjectConfig = {
-  title: string;
-  subtitle?: string;
-  image?: string;
-  period?: string;
-  tools?: string;
-  keywords?: string;
-  problem?: string;
-  solution?: string;
-  challenges?: string[];
-  impact?: string[];
-  designProcessSteps?: DesignProcessStep[];
-};
 
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
-
-/* ---------- Projects data ---------- */
-
-const allocationsDesignProcess: DesignProcessStep[] = [
-  {
-    title: "Insurance story begins",
-    description:
-      "The journey begins when I became an insurance agent. I quickly saw the imperfections in the industry, with agents often prioritizing their profits over the client's best interests. This led me to develop a personal annuities quoting system that would offer transparency and fairness.",
-    // заміни шлях на свій реальний файл у /public
-    image: "/design-process/insurance-story-begins.jpg",
-  },
-  {
-    title: "The Birth of AnnuitiesGenius",
-    description:
-      "The idea to share this fair and transparent annuities system with the entire industry was born. Agata Global Tech LLC was registered, the team was assembled, and the first prototype of AnnuitiesGenius was created.",
-  },
-  {
-    title: "Launch & Early Adoption",
-    description:
-      "The vision started to materialize. The first version (V1.0) of the AnnuitiesGenius platform was launched, bringing transparency to annuity recommendations. By the end of the year, approximately 50 agents were using the system, helping ensure fair annuity choices for clients.",
-  },
-];
-
-const allocationsCase: ProjectConfig = {
-  title: "Allocations AI engine",
-  subtitle:
-    "Designing an institutional-grade allocation platform that makes complex portfolios clear, navigable, and fast to configure.",
-  image: "/allocations-test.png",
-  period: "2025",
-  tools: "Figma, FigJam",
-  keywords: "FinTech, B2B SaaS, Data visualization, Complex flows",
-  problem:
-    "Unclear Value Proposition. The startup’s original website didn’t clearly show its unique product or explain how it solved user problems.",
-  solution:
-    "Visual Product Walkthrough. Created a three-step 3D animation to show how the product works, making it easy for non-technical users to understand.",
-  challenges: [
-    "Tight Timeline and Team Coordination. Had two months to plan and deliver a large project, including a 3D animation that needed quick client approval.",
-    "Designing intuitive, safe interactions for advanced allocation logic.",
-    "Aligning product, quant, legal and sales on one mental model.",
-  ],
-  impact: [
-    "42% faster allocation decisions in moderated tests.",
-    "Higher completion rate of complex workflows after redesign.",
-    "Clear UX foundation for future AI features across the product suite.",
-  ],
-  designProcessSteps: allocationsDesignProcess,
-};
-
-const websiteBoostCase: ProjectConfig = {
-  title: "Website that boosted startup revenue",
-  subtitle:
-    "Rebuilt and optimized marketing site — improved acquisition and conversion through continuous experiments.",
-  image: "/educator-test.png",
-  period: "2024",
-  tools: "Figma, Webflow, Google Analytics, Hotjar",
-  keywords: "Marketing website, Conversion, Experimentation, UX writing",
-  problem:
-    "Low Conversion from Existing Traffic. The startup had strong organic and paid traffic, but the old website did not clearly communicate value or guide visitors to sign up.",
-  solution:
-    "Focused Narrative & Experiment Framework. Reworked structure and messaging, highlighted proof points, and set up an experiment backlog for continuous A/B testing.",
-  challenges: [
-    "Balancing modern visual style with clarity and performance.",
-    "Preserving SEO equity while restructuring pages and content.",
-    "Aligning founders, marketing, and engineering around one clear story.",
-  ],
-  impact: [
-    "$250k+ Worth of organic traffic generated.",
-    "1554% Increase in monthly organic search traffic in 8 months.",
-    "66% Increase in signup conversion rate.",
-    "70+ NPS score maintained after redesign.",
-  ],
-  // designProcessSteps можна буде додати пізніше, зараз секція не показується
-};
-
-const flowsPlaceholder: ProjectConfig = {
-  title: "Operational tools & AI-assisted flows",
-  subtitle:
-    "Full case study coming soon. Deep dive into complex internal workflows.",
-};
-
-const projects: Record<string, ProjectConfig> = {
-  allocations: allocationsCase,
-  "website-boost": websiteBoostCase,
-  flows: flowsPlaceholder,
-};
-
-/* ---------- Route segment config ---------- */
-
-export function generateStaticParams() {
-  return Object.keys(projects).map((slug) => ({ slug }));
-}
-export const dynamicParams = true;
 
 /* ---------- Helpers ---------- */
 
@@ -127,11 +19,20 @@ const splitText = (text: string) => {
   return { first, rest: rest.join(". ") };
 };
 
+/* ---------- Route segment config ---------- */
+
+export function generateStaticParams() {
+  return Object.keys(projects).map((slug) => ({ slug }));
+}
+
+export const dynamicParams = true;
+
 /* ---------- Page ---------- */
 
 export default function WorkDetailPage(props: PageProps) {
   const { slug } = use(props.params);
-  const project = projects[slug];
+  const project: ProjectConfig | undefined = projects[slug];
+
   if (!project) notFound();
 
   const {

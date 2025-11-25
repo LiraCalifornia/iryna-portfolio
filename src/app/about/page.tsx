@@ -1,10 +1,12 @@
+// src/app/about/page.tsx
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "About — Iryna Sofiian",
-  description: "About Iryna Sofiian: story, work philosophy, values, and links.",
+  description:
+    "About Iryna Sofiian: story, work philosophy, values, and links.",
   alternates: { canonical: "/about" },
   openGraph: {
     title: "About — Iryna Sofiian",
@@ -45,8 +47,8 @@ const mosaicPhotos = [
 export default function AboutPage() {
   return (
     <main className="bg-white">
-      {/* 🔥 Container now perfectly centered at 768px */}
-      <div className="mx-auto w-full max-w-3xl px-6 py-24">
+      {/* 🔥 Container perfectly centered at 768px with NO horizontal padding */}
+      <div className="mx-auto w-full max-w-3xl py-24">
         <div className="w-full">
 
           {/* HERO */}

@@ -1,12 +1,10 @@
-// src/app/about/page.tsx
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "About — Iryna Sofiian",
-  description:
-    "About Iryna Sofiian: story, work philosophy, values, and links.",
+  description: "About Iryna Sofiian: story, work philosophy, values, and links.",
   alternates: { canonical: "/about" },
   openGraph: {
     title: "About — Iryna Sofiian",
@@ -47,8 +45,9 @@ const mosaicPhotos = [
 export default function AboutPage() {
   return (
     <main className="bg-white">
-      <div className="mx-auto w-full max-w-6xl px-6 lg:px-24 py-24">
-        <div className="max-w-3xl">
+      {/* 🔥 Container now perfectly centered at 768px */}
+      <div className="mx-auto w-full max-w-3xl px-6 py-24">
+        <div className="w-full">
 
           {/* HERO */}
           <header className="mb-20">
@@ -128,7 +127,6 @@ export default function AboutPage() {
               ))}
             </div>
 
-            {/* MOSAIC caption – text M */}
             <p className="mt-3 text-center text-slate-500 text-[16px] leading-[24px]">
               A small mosaic of moments that shape how I work and facilitate
             </p>
@@ -160,7 +158,6 @@ export default function AboutPage() {
                     />
                   </div>
 
-                  {/* FIGCAPTION → text M + mt-3 (12px) */}
                   <figcaption className="mt-3 text-center text-[16px] leading-[24px] text-slate-600">
                     {caption}
                   </figcaption>
@@ -177,7 +174,6 @@ export default function AboutPage() {
 
             <div className="space-y-4">
 
-              {/* PEOPLE */}
               <div className="rounded-2xl bg-slate-50 border border-slate-200 px-10 py-5">
                 <p className="mb-[10px] flex items-center">
                   <span className="mr-2 text-[16px] leading-[24px] font-semibold text-blue-600">
@@ -194,7 +190,6 @@ export default function AboutPage() {
                 </p>
               </div>
 
-              {/* CONTINUOUS LEARNING */}
               <div className="rounded-2xl bg-slate-50 border border-slate-200 px-10 py-5">
                 <p className="mb-[10px] flex items-center">
                   <span className="mr-2 text-[16px] leading-[24px] font-semibold text-blue-600">
@@ -211,7 +206,6 @@ export default function AboutPage() {
                 </p>
               </div>
 
-              {/* PARTNERSHIP */}
               <div className="rounded-2xl bg-slate-50 border border-slate-200 px-10 py-5">
                 <p className="mb-[10px] flex items-center">
                   <span className="mr-2 text-[16px] leading-[24px] font-semibold text-blue-600">

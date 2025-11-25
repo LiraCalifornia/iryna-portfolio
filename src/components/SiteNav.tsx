@@ -16,16 +16,14 @@ export default function SiteNav() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/80 backdrop-blur">
-      <div className="mx-auto w-full max-w-6xl px-6 lg:px-24">
+      <div className="mx-auto w-full max-w-3xl">
         <nav className="flex h-16 items-center justify-between">
           {/* Logo + name */}
           <Link href="/" aria-label="Home" className="flex items-center gap-3">
             <div className="relative h-9 w-9 overflow-hidden rounded-full">
-              {/* fallback-плашка під фото */}
               <div className="absolute inset-0 flex items-center justify-center bg-slate-900 text-[11px] font-semibold text-white">
                 IS
               </div>
-              {/* саме фото (якщо /public/avatar.jpg існує — воно перекриє fallback) */}
               <Image
                 src="/avatar.jpg"
                 alt="Iryna Sofiian"
@@ -36,23 +34,25 @@ export default function SiteNav() {
               />
             </div>
 
-            <span className="text-[17px] font-medium tracking-tight text-slate-900">
+            {/* Iryna Sofiian — text M bold */}
+            <span className="text-[16px] leading-[24px] font-black tracking-tight text-slate-900">
               Iryna Sofiian
             </span>
           </Link>
 
-          {/* Nav links */}
-          <ul className="flex items-center gap-8 text-sm font-medium">
+          {/* Nav links — text M regular */}
+          <ul className="flex items-center gap-8">
             {links.map(({ href, label }) => {
               const isActive = pathname === href;
+
               return (
                 <li key={href} className="relative">
                   <Link
                     href={href}
                     className={
                       isActive
-                        ? "transition-colors text-slate-900"
-                        : "transition-colors text-slate-600 hover:text-slate-900"
+                        ? "text-[16px] leading-[24px] font-normal text-slate-900 transition-colors"
+                        : "text-[16px] leading-[24px] font-normal text-slate-700 hover:text-slate-900 transition-colors"
                     }
                   >
                     {label}

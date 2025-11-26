@@ -10,12 +10,6 @@
 }
 
 /* ---------- Tailwind Theme (Tailwind v4) ---------- */
-/* Тут ми задаємо всі твої кастомні токени:
-   • кольори
-   • фон
-   • шрифти
-   • брейкпоінти (нові!)
-*/
 
 @theme inline {
   /* Кольори */
@@ -25,13 +19,9 @@
   /* Шрифт */
   --font-sans: var(--font-plus-jakarta);
 
-  /* ---------- Кастомні брейкпоінти для ВСЬОГО сайту ---------- */
-  /* Tailwind v4 вимагає rem:
-     756px  = 47.25rem
-     896px  = 56rem
-  */
-  --breakpoint-bp-756: 47.25rem;
-  --breakpoint-bp-896: 56rem;
+  /* Breakpoints (rem, бо Tailwind v4) */
+  --breakpoint-bp-756: 47.25rem; /* 756px */
+  --breakpoint-bp-896: 56rem;    /* 896px */
 }
 
 /* ---------- Base styles ---------- */
@@ -41,4 +31,173 @@ body {
   color: var(--foreground);
   font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, Arial,
     Helvetica, sans-serif;
+}
+
+/* ---------- TYPOGRAPHY & SPACING SYSTEM ---------- */
+
+@layer utilities {
+  /* ====== TEXT STYLES WITH "DEMOTION" НА МАЛОМУ МОБАЙЛІ ====== */
+
+  .typ-h1 {
+    @apply font-semibold text-slate-900 tracking-[-0.03em];
+    font-size: 48px;
+    line-height: 56px;
+  }
+
+  .typ-h2 {
+    @apply font-semibold text-slate-900 tracking-[-0.02em];
+    font-size: 40px;
+    line-height: 48px;
+  }
+
+  .typ-h3 {
+    @apply font-semibold text-slate-900 tracking-[-0.02em];
+    font-size: 32px;
+    line-height: 40px;
+  }
+
+  .typ-h4 {
+    @apply font-semibold text-slate-900 tracking-[-0.01em];
+    font-size: 24px;
+    line-height: 36px;
+  }
+
+  /* H5: desktop 24/36, mobile-small ~ text L bold */
+  .typ-h5 {
+    @apply font-semibold text-slate-900 tracking-[-0.01em];
+    font-size: 20px;
+    line-height: 32px;
+  }
+
+  .typ-textL {
+    @apply text-slate-600 tracking-[0.01em];
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .typ-textL-bold {
+    @apply font-semibold text-slate-900 tracking-[0.01em];
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .typ-textM {
+    @apply text-slate-600 tracking-[0.01em];
+    font-size: 13px;
+    line-height: 20px;
+  }
+
+  .typ-textM-bold {
+    @apply font-semibold text-slate-900 tracking-[0.01em];
+    font-size: 13px;
+    line-height: 20px;
+  }
+
+  .typ-textS {
+    @apply text-slate-500 tracking-[0.02em];
+    font-size: 13px;
+    line-height: 20px;
+  }
+
+  .typ-caps {
+    @apply font-semibold uppercase text-slate-500 tracking-[0.16em];
+    font-size: 13px;
+    line-height: 20px;
+  }
+
+  /* ≥756px — справжні токени */
+  @media (min-width: 47.25rem) {
+    .typ-h1 {
+      font-size: 60px;
+      line-height: 72px;
+    }
+
+    .typ-h2 {
+      font-size: 48px;
+      line-height: 56px;
+    }
+
+    .typ-h3 {
+      font-size: 40px;
+      line-height: 48px;
+    }
+
+    .typ-h4 {
+      font-size: 32px;
+      line-height: 40px;
+    }
+
+    .typ-h5 {
+      font-size: 24px;
+      line-height: 36px;
+    }
+
+    .typ-textL,
+    .typ-textL-bold {
+      font-size: 20px;
+      line-height: 32px;
+    }
+
+    .typ-textM,
+    .typ-textM-bold {
+      font-size: 16px;
+      line-height: 24px;
+    }
+
+    .typ-textS,
+    .typ-caps {
+      font-size: 13px;
+      line-height: 20px;
+    }
+  }
+
+  /* ====== VERTICAL RHYTHM (SECTIONS / STACKS) ====== */
+
+  .section-y {
+    @apply pt-10 pb-14;
+  }
+
+  @media (min-width: 47.25rem) {
+    .section-y {
+      @apply pt-14 pb-18;
+    }
+  }
+
+  @media (min-width: 56rem) {
+    .section-y {
+      @apply pt-20 pb-24;
+    }
+  }
+
+  .stack-md {
+    @apply space-y-4;
+  }
+
+  @media (min-width: 47.25rem) {
+    .stack-md {
+      @apply space-y-5;
+    }
+  }
+
+  @media (min-width: 56rem) {
+    .stack-md {
+      @apply space-y-6;
+    }
+  }
+
+  .stack-lg {
+    @apply space-y-6;
+  }
+
+  @media (min-width: 47.25rem) {
+    .stack-lg {
+      @apply space-y-7;
+    }
+  }
+
+  @media (min-width: 56rem) {
+    .stack-lg {
+      @apply space-y-8;
+    }
+  }
 }

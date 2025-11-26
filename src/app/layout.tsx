@@ -1,5 +1,4 @@
 // src/app/layout.tsx
-
 import type { Metadata } from "next";
 import "./globals.css";
 import SiteNav from "@/components/SiteNav";
@@ -59,14 +58,9 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
-
       <body className="bg-white text-neutral-900 antialiased">
         <SiteNav />
-
-        {/* GLOBAL LAYOUT CONTAINER */}
-        <PageContainer>
-          {children}
-        </PageContainer>
+        <PageContainer>{children}</PageContainer>
       </body>
     </html>
   );

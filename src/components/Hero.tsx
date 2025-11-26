@@ -20,9 +20,9 @@ const STRAVA = "https://www.strava.com/athletes/32493473";
 
 export default function Hero() {
   return (
-    <section className="bg-white">
-      {/* Загальний контейнер сторінки */}
-      <div className="mx-auto w-full max-w-7xl px-6 lg:px-0 py-16 sm:py-20">
+    <section className="bg-white section-y">
+      {/* ЖОДНИХ px тут — шириною керує PageContainer */}
+      <div className="mx-auto w-full max-w-7xl">
         {/* Hero-блок: центрований, max 768px */}
         <div className="mx-auto max-w-[768px] flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10 lg:gap-16">
           {/* LEFT: текстовий блок max 524px */}
@@ -78,7 +78,7 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* RIGHT: фото 190px, центрується по вертикалі відносно текстового блоку */}
+          {/* RIGHT: фото 190px */}
           <div className="relative w-[190px] aspect-[190/237] rounded-3xl overflow-hidden bg-slate-100">
             <Image
               src={HERO_IMAGE_SRC}

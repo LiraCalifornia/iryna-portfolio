@@ -36,7 +36,11 @@ const familyPhotos = [
 ];
 
 const mosaicPhotos = [
-  { src: "/about-1.jpg", alt: "Workshop moment", span: "md:col-span-2 md:row-span-2" },
+  {
+    src: "/about-1.jpg",
+    alt: "Workshop moment",
+    span: "md:col-span-2 md:row-span-2",
+  },
   { src: "/about-2.jpg", alt: "Team collaboration" },
   { src: "/about-3.jpg", alt: "Sticky notes & structure" },
   { src: "/about-4.jpg", alt: "Quiet observation" },
@@ -47,16 +51,15 @@ const mosaicPhotos = [
 export default function AboutPage() {
   return (
     <main className="bg-white">
-      {/* 🔥 Container perfectly centered at 768px with NO horizontal padding */}
+      {/* Container perfectly centered at 768px with NO horizontal padding */}
       <div className="mx-auto w-full max-w-3xl py-24">
         <div className="w-full">
-
           {/* HERO */}
           <header className="mb-20">
-            <h1 className="mb-6 font-semibold tracking-tight text-slate-900 text-[48px] leading-[56px]">
+            <h1 className="mb-6 font-semibold tracking-tight text-slate-900 text-[32px] leading-[40px] sm:text-[40px] sm:leading-[48px] md:text-[48px] md:leading-[56px]">
               About Iryna Sofiian
             </h1>
-            <p className="text-slate-700 text-[24px] leading-[40px]">
+            <p className="text-slate-700 text-[18px] leading-[32px] md:text-[24px] md:leading-[40px]">
               My design is, first and foremost, about solving problems for users
               and for business. That alone determines my methods and tools,
               never the other way around. I adapt to corporations, startups, and
@@ -66,20 +69,22 @@ export default function AboutPage() {
 
           {/* STORY */}
           <section className="mb-20">
-            <h2 className="mb-4 font-semibold text-slate-900 text-[24px] leading-[36px]">
+            <h2 className="mb-4 font-semibold text-slate-900 text-[20px] leading-[30px] md:text-[24px] md:leading-[36px]">
               Story
             </h2>
 
-            <p className="text-slate-700 text-[20px] leading-[36px]">
+            <p className="text-slate-700 text-[16px] leading-[28px] md:text-[20px] md:leading-[36px]">
               I was born in 1994 in Lviv, Ukraine, with a clear sense that I
               wanted to solve people’s problems not only efficiently, but
               beautifully. That’s how I began exploring design.
-              <br /><br />
+              <br />
+              <br />
               I first studied interior design for two years, but soon realized
               it wasn’t my path. Then I turned to print and graphic design,
               which became my formal education. While studying, I discovered the
               world of digital products and started learning interface design.
-              <br /><br />
+              <br />
+              <br />
               Fate brought me together with programmers, and during my first
               year I was immersed in code. By graduation I was already creating
               Android and iOS apps, then moved into web products. That
@@ -89,23 +94,24 @@ export default function AboutPage() {
 
           {/* WORK */}
           <section className="mb-20">
-            <h2 className="mb-4 font-semibold text-slate-900 text-[24px] leading-[36px]">
+            <h2 className="mb-4 font-semibold text-slate-900 text-[20px] leading-[30px] md:text-[24px] md:leading-[36px]">
               Work
             </h2>
 
-            <p className="text-slate-700 text-[20px] leading-[36px]">
+            <p className="text-slate-700 text-[16px] leading-[28px] md:text-[20px] md:leading-[36px]">
               The key value I bring is a broad kaleidoscope of experience. I’ve
               practiced many well-known frameworks and learned that lots of them
               are beautiful theory. There are no perfect companies for perfect
               methodologies.
-              <br /><br />
+              <br />
+              <br />
               I’ve developed flexible, effective ways to solve problems —
               through design and beyond it. AI has transformed the process, yet
               real experience remains the foundation while AI is the catalyst.
             </p>
 
             {/* MOSAIC */}
-            <div className="mt-6 grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-3">
+            <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-3">
               {mosaicPhotos.map((photo, index) => (
                 <div
                   key={photo.src}
@@ -129,18 +135,18 @@ export default function AboutPage() {
               ))}
             </div>
 
-            <p className="mt-3 text-center text-slate-500 text-[16px] leading-[24px]">
+            <p className="mt-3 text-center text-slate-500 text-[14px] leading-[22px] md:text-[16px] md:leading-[24px]">
               A small mosaic of moments that shape how I work and facilitate
             </p>
           </section>
 
           {/* FAMILY */}
           <section className="mb-20">
-            <h2 className="mb-4 font-semibold text-slate-900 text-[24px] leading-[36px]">
+            <h2 className="mb-4 font-semibold text-slate-900 text-[20px] leading-[30px] md:text-[24px] md:leading-[36px]">
               Family
             </h2>
 
-            <p className="mb-8 text-slate-700 text-[20px] leading-[36px]">
+            <p className="mb-8 text-slate-700 text-[16px] leading-[28px] md:text-[20px] md:leading-[36px]">
               There are three of us: two imperfect humans and one perfect dog —
               Marshal. Our home is the cozy, safe place that gives balance and
               strength. I’m deeply grateful to Lyubomyr for unwavering support.
@@ -160,7 +166,7 @@ export default function AboutPage() {
                     />
                   </div>
 
-                  <figcaption className="mt-3 text-center text-[16px] leading-[24px] text-slate-600">
+                  <figcaption className="mt-3 text-center text-[14px] leading-[22px] text-slate-600 md:text-[16px] md:leading-[24px]">
                     {caption}
                   </figcaption>
                 </figure>
@@ -170,13 +176,12 @@ export default function AboutPage() {
 
           {/* VALUES */}
           <section className="mb-20">
-            <h2 className="mb-8 font-semibold text-slate-900 text-[24px] leading-[36px]">
+            <h2 className="mb-8 font-semibold text-slate-900 text-[20px] leading-[30px] md:text-[24px] md:leading-[36px]">
               Values
             </h2>
 
             <div className="space-y-4">
-
-              <div className="rounded-2xl bg-slate-50 border border-slate-200 px-10 py-5">
+              <div className="rounded-2xl border border-slate-200 bg-slate-50 px-6 py-5 md:px-10">
                 <p className="mb-[10px] flex items-center">
                   <span className="mr-2 text-[16px] leading-[24px] font-semibold text-blue-600">
                     &gt;_
@@ -186,13 +191,15 @@ export default function AboutPage() {
                   </span>
                 </p>
 
-                <p className="text-[20px] leading-[32px] text-slate-900">
-                  <strong className="font-semibold">Users, businesses, technologies</strong>{" "}
+                <p className="text-[16px] leading-[28px] text-slate-900 md:text-[20px] md:leading-[32px]">
+                  <strong className="font-semibold">
+                    Users, businesses, technologies
+                  </strong>{" "}
                   — all are about people. I start by listening and understanding.
                 </p>
               </div>
 
-              <div className="rounded-2xl bg-slate-50 border border-slate-200 px-10 py-5">
+              <div className="rounded-2xl border border-slate-200 bg-slate-50 px-6 py-5 md:px-10">
                 <p className="mb-[10px] flex items-center">
                   <span className="mr-2 text-[16px] leading-[24px] font-semibold text-blue-600">
                     &gt;_
@@ -202,13 +209,15 @@ export default function AboutPage() {
                   </span>
                 </p>
 
-                <p className="text-[20px] leading-[32px] text-slate-900">
-                  <strong className="font-semibold">Tools and methods must adapt.</strong>{" "}
+                <p className="text-[16px] leading-[28px] text-slate-900 md:text-[20px] md:leading-[32px]">
+                  <strong className="font-semibold">
+                    Tools and methods must adapt.
+                  </strong>{" "}
                   Today’s AI trick may be irrelevant tomorrow. Problems evolve.
                 </p>
               </div>
 
-              <div className="rounded-2xl bg-slate-50 border border-slate-200 px-10 py-5">
+              <div className="rounded-2xl border border-slate-200 bg-slate-50 px-6 py-5 md:px-10">
                 <p className="mb-[10px] flex items-center">
                   <span className="mr-2 text-[16px] leading-[24px] font-semibold text-blue-600">
                     &gt;_
@@ -218,18 +227,19 @@ export default function AboutPage() {
                   </span>
                 </p>
 
-                <p className="text-[20px] leading-[32px] text-slate-900">
-                  <strong className="font-semibold">The best work comes when you care like an owner.</strong>{" "}
+                <p className="text-[16px] leading-[28px] text-slate-900 md:text-[20px] md:leading-[32px]">
+                  <strong className="font-semibold">
+                    The best work comes when you care like an owner.
+                  </strong>{" "}
                   All-in or not at all.
                 </p>
               </div>
-
             </div>
           </section>
 
           {/* FIND ME */}
           <section className="mb-20">
-            <h2 className="mb-4 font-semibold text-slate-900 text-[24px] leading-[36px]">
+            <h2 className="mb-4 font-semibold text-slate-900 text-[20px] leading-[30px] md:text-[24px] md:leading-[36px]">
               Find me
             </h2>
 
@@ -237,7 +247,7 @@ export default function AboutPage() {
               <li>
                 <Link
                   href="https://www.linkedin.com/in/iryna-sofiian/"
-                  className="block rounded-none border border-slate-200 p-4 text-slate-800 text-[16px] leading-[24px] hover:bg-slate-50"
+                  className="block rounded-none border border-slate-200 p-4 text-[15px] leading-[22px] text-slate-800 hover:bg-slate-50 md:text-[16px] md:leading-[24px]"
                 >
                   LinkedIn
                 </Link>
@@ -245,7 +255,7 @@ export default function AboutPage() {
               <li>
                 <Link
                   href="https://www.strava.com/athletes/32493473"
-                  className="block rounded-none border border-slate-200 p-4 text-slate-800 text-[16px] leading-[24px] hover:bg-slate-50"
+                  className="block rounded-none border border-slate-200 p-4 text-[15px] leading-[22px] text-slate-800 hover:bg-slate-50 md:text-[16px] md:leading-[24px]"
                 >
                   Strava
                 </Link>
@@ -253,7 +263,7 @@ export default function AboutPage() {
               <li>
                 <Link
                   href="https://www.instagram.com/sofiian.iryna/"
-                  className="block rounded-none border border-slate-200 p-4 text-slate-800 text-[16px] leading-[24px] hover:bg-slate-50"
+                  className="block rounded-none border border-slate-200 p-4 text-[15px] leading-[22px] text-slate-800 hover:bg-slate-50 md:text-[16px] md:leading-[24px]"
                 >
                   Instagram
                 </Link>
@@ -261,7 +271,7 @@ export default function AboutPage() {
               <li>
                 <Link
                   href="https://www.facebook.com/iryna.sofiyan"
-                  className="block rounded-none border border-slate-200 p-4 text-slate-800 text-[16px] leading-[24px] hover:bg-slate-50"
+                  className="block rounded-none border border-slate-200 p-4 text-[15px] leading-[22px] text-slate-800 hover:bg-slate-50 md:text-[16px] md:leading-[24px]"
                 >
                   Facebook
                 </Link>
@@ -270,10 +280,9 @@ export default function AboutPage() {
           </section>
 
           {/* FOOTER */}
-          <footer className="border-t border-slate-200 pt-6 text-slate-500 text-[13px] leading-[20px]">
+          <footer className="border-t border-slate-200 pt-6 text-[13px] leading-[20px] text-slate-500">
             © 2015–2025 Iryna Sofiian
           </footer>
-
         </div>
       </div>
     </main>

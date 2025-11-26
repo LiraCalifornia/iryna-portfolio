@@ -38,8 +38,8 @@ export function DesignProcess({
           {eyebrow}
         </p>
 
-        {/* H2 */}
-        <h2 className="font-semibold tracking-tight text-slate-900 text-[32px] leading-[40px] md:text-[48px] md:leading-[56px]">
+        {/* H2 — менший на мобайлі, як на інших сторінках */}
+        <h2 className="font-semibold tracking-tight text-slate-900 text-[24px] leading-[32px] sm:text-[32px] sm:leading-[40px] md:text-[48px] md:leading-[56px]">
           {title}
         </h2>
       </header>
@@ -94,13 +94,13 @@ export function DesignProcess({
 
               {/* Права контентна частина */}
               <div className="flex-1 mt-[26px]">
-                {/* H4: 32/40 */}
-                <h3 className="font-semibold tracking-tight text-slate-900 text-[32px] leading-[40px]">
+                {/* H4: менший на мобайлі, 32/40 на десктопі */}
+                <h3 className="font-semibold tracking-tight text-slate-900 text-[20px] leading-[30px] sm:text-[24px] sm:leading-[32px] md:text-[32px] md:leading-[40px]">
                   {step.title}
                 </h3>
 
-                {/* text L: 20/32 */}
-                <p className="mt-4 text-[20px] leading-[32px] text-slate-700">
+                {/* text L: 20/32 → адаптація для мобайлу */}
+                <p className="mt-4 text-slate-700 text-[16px] leading-[28px] sm:text-[18px] sm:leading-[30px] md:text-[20px] md:leading-[32px]">
                   {step.description}
                 </p>
 

@@ -59,9 +59,8 @@ export default function WorkDetailPage(props: PageProps) {
 
   return (
     <main className="bg-white">
-      {/* головний контентний контейнер */}
-      {/* px-8 = 32px на мобайлі, з sm і вище повертаємось до 0, щоб лишилась чиста колона 768px */}
-      <div className="mx-auto w-full max-w-[768px] px-8 sm:px-0 pt-16 pb-20">
+      {/* головний контентний контейнер — тільки центрування, без локальних падінгів */}
+      <div className="mx-auto w-full max-w-[768px]">
         {/* Hero image */}
         {image && (
           <div className="relative w-full h-[220px] sm:h-[320px] md:h-[380px] rounded-xl overflow-hidden bg-slate-100">
@@ -77,20 +76,20 @@ export default function WorkDetailPage(props: PageProps) {
 
         {/* Header */}
         <header className="mt-8">
-          {/* H2: 48/56 */}
-          <h1 className="text-[48px] leading-[56px] tracking-[-0.01em] font-semibold text-slate-900">
+          {/* H2: адаптація для мобайлу */}
+          <h1 className="font-semibold tracking-[-0.01em] text-slate-900 text-[32px] leading-[40px] sm:text-[40px] sm:leading-[48px] md:text-[48px] md:leading-[56px]">
             {title}
           </h1>
 
-          {/* Subtitle 4: 24/40, відступ 24 */}
+          {/* Subtitle 4: адаптація */}
           {subtitle && (
-            <p className="mt-6 text-[24px] leading-[40px] text-slate-700 tracking-[0.01em]">
+            <p className="mt-6 text-slate-700 tracking-[0.01em] text-[18px] leading-[32px] sm:text-[20px] sm:leading-[36px] md:text-[24px] md:leading-[40px]">
               {subtitle}
             </p>
           )}
 
-          {/* Meta badges: mt 32, text M 16/24 */}
-          <div className="mt-8 flex flex-wrap gap-2 text-[16px] leading-[24px]">
+          {/* Meta badges */}
+          <div className="mt-8 flex flex-wrap gap-2 text-[15px] leading-[22px] sm:text-[16px] sm:leading-[24px]">
             {period && (
               <span className="inline-flex items-center gap-1 rounded-lg border border-slate-200 bg-slate-50 px-3 py-1 text-slate-700 tracking-[0.01em]">
                 <span>🗓</span>
@@ -124,13 +123,12 @@ export default function WorkDetailPage(props: PageProps) {
             <section className="mt-16 space-y-6 sm:space-y-7">
               {/* Problem */}
               {problem && (
-                <div className="rounded-xl bg-slate-50 border border-slate-200 px-10 py-5 sm:px-10 sm:py-5">
-                  {/* >_ (L bold) + CUPS 14 */}
+                <div className="rounded-xl bg-slate-50 border border-slate-200 px-6 py-5 sm:px-10 sm:py-5">
                   <h2 className="flex items-center gap-2">
-                    <span className="text-[20px] leading-[32px] font-semibold text-blue-600">
+                    <span className="text-[18px] leading-[28px] sm:text-[20px] sm:leading-[32px] font-semibold text-blue-600">
                       {">_"}
                     </span>
-                    <span className="text-[14px] leading-[20px] font-semibold uppercase tracking-[0.16em] text-slate-500">
+                    <span className="text-[13px] leading-[20px] sm:text-[14px] font-semibold uppercase tracking-[0.16em] text-slate-500">
                       Problem
                     </span>
                   </h2>
@@ -138,7 +136,7 @@ export default function WorkDetailPage(props: PageProps) {
                   {(() => {
                     const { first, rest } = splitText(problem);
                     return (
-                      <p className="mt-[10px] text-[20px] leading-[32px] tracking-[0.01em] text-slate-700">
+                      <p className="mt-[10px] text-slate-700 tracking-[0.01em] text-[16px] leading-[28px] sm:text-[18px] sm:leading-[30px] md:text-[20px] md:leading-[32px]">
                         <span className="font-semibold text-slate-900">
                           {first}.
                         </span>{" "}
@@ -151,12 +149,12 @@ export default function WorkDetailPage(props: PageProps) {
 
               {/* Solution */}
               {solution && (
-                <div className="rounded-xl bg-slate-50 border border-slate-200 px-10 py-5 sm:px-10 sm:py-5">
+                <div className="rounded-xl bg-slate-50 border border-slate-200 px-6 py-5 sm:px-10 sm:py-5">
                   <h2 className="flex items-center gap-2">
-                    <span className="text-[20px] leading-[32px] font-semibold text-blue-600">
+                    <span className="text-[18px] leading-[28px] sm:text-[20px] sm:leading-[32px] font-semibold text-blue-600">
                       {">_"}
                     </span>
-                    <span className="text-[14px] leading-[20px] font-semibold uppercase tracking-[0.16em] text-slate-500">
+                    <span className="text-[13px] leading-[20px] sm:text-[14px] font-semibold uppercase tracking-[0.16em] text-slate-500">
                       Solution
                     </span>
                   </h2>
@@ -164,7 +162,7 @@ export default function WorkDetailPage(props: PageProps) {
                   {(() => {
                     const { first, rest } = splitText(solution);
                     return (
-                      <p className="mt-[10px] text-[20px] leading-[32px] tracking-[0.01em] text-slate-700">
+                      <p className="mt-[10px] text-slate-700 tracking-[0.01em] text-[16px] leading-[28px] sm:text-[18px] sm:leading-[30px] md:text-[20px] md:leading-[32px]">
                         <span className="font-semibold text-slate-900">
                           {first}.
                         </span>{" "}
@@ -177,12 +175,12 @@ export default function WorkDetailPage(props: PageProps) {
 
               {/* Challenges */}
               {challenges && challenges.length > 0 && (
-                <div className="rounded-xl bg-slate-50 border border-slate-200 px-10 py-5 sm:px-10 sm:py-5">
+                <div className="rounded-xl bg-slate-50 border border-slate-200 px-6 py-5 sm:px-10 sm:py-5">
                   <h2 className="flex items-center gap-2">
-                    <span className="text-[20px] leading-[32px] font-semibold text-blue-600">
+                    <span className="text-[18px] leading-[28px] sm:text-[20px] sm:leading-[32px] font-semibold text-blue-600">
                       {">_"}
                     </span>
-                    <span className="text-[14px] leading-[20px] font-semibold uppercase tracking-[0.16em] text-slate-500">
+                    <span className="text-[13px] leading-[20px] sm:text-[14px] font-semibold uppercase tracking-[0.16em] text-slate-500">
                       Challenges
                     </span>
                   </h2>
@@ -192,7 +190,7 @@ export default function WorkDetailPage(props: PageProps) {
                       const { first, rest } = splitText(item);
                       return (
                         <li key={index}>
-                          <p className="text-[20px] leading-[32px] tracking-[0.01em] text-slate-700">
+                          <p className="text-slate-700 tracking-[0.01em] text-[16px] leading-[28px] sm:text-[18px] sm:leading-[30px] md:text-[20px] md:leading-[32px]">
                             <span className="font-semibold text-slate-900">
                               {first}.
                             </span>{" "}
@@ -208,13 +206,11 @@ export default function WorkDetailPage(props: PageProps) {
 
             {/* Impact */}
             <section className="mt-16">
-              {/* H5: 24/36 */}
-              <h2 className="text-[24px] leading-[36px] font-semibold tracking-tight text-slate-900">
+              <h2 className="font-semibold tracking-tight text-slate-900 text-[20px] leading-[30px] md:text-[24px] md:leading-[36px]">
                 Impact
               </h2>
 
-              {/* text L custom: 20/36 */}
-              <p className="mt-3 text-[20px] leading-[36px] text-slate-600 tracking-[0.01em]">
+              <p className="mt-3 text-slate-600 tracking-[0.01em] text-[16px] leading-[28px] sm:text-[18px] sm:leading-[30px] md:text-[20px] md:leading-[36px]">
                 Both the initial launch and further iterations delivered
                 measurable results and created a solid foundation for long-term,
                 scalable growth.
@@ -226,12 +222,10 @@ export default function WorkDetailPage(props: PageProps) {
                   const label = rest.join(" ");
                   return (
                     <div key={index} className="space-y-1.5">
-                      {/* H4: 32/40 */}
-                      <div className="text-[32px] leading-[40px] font-semibold text-slate-900">
+                      <div className="font-semibold text-slate-900 text-[24px] leading-[32px] sm:text-[28px] sm:leading-[36px] md:text-[32px] md:leading-[40px]">
                         {stat}
                       </div>
-                      {/* text M: 16/24 */}
-                      <p className="text-[16px] leading-[24px] text-slate-600 tracking-[0.01em]">
+                      <p className="text-slate-600 tracking-[0.01em] text-[14px] leading-[22px] sm:text-[15px] sm:leading-[22px] md:text-[16px] md:leading-[24px]">
                         {label}
                       </p>
                     </div>
@@ -248,7 +242,7 @@ export default function WorkDetailPage(props: PageProps) {
         ) : (
           <section className="mt-16">
             <div className="rounded-xl bg-slate-50 border border-slate-200 px-4 py-5 sm:px-6 sm:py-7">
-              <p className="text-[16px] leading-[24px] text-slate-600 tracking-[0.01em]">
+              <p className="text-slate-600 tracking-[0.01em] text-[15px] leading-[22px] sm:text-[16px] sm:leading-[24px]">
                 Full case study for this project is coming soon. If you&apos;d
                 like details now, please{" "}
                 <Link
@@ -263,7 +257,7 @@ export default function WorkDetailPage(props: PageProps) {
           </section>
         )}
 
-        {/* Footer — text S 13/20, відступ 64 зверху */}
+        {/* Footer — тільки глобальні верт. відступи зверху працюють з контейнера */}
         <footer className="mt-16 border-t border-slate-100 pt-5 text-[13px] leading-[20px] text-slate-500 tracking-[0.01em]">
           © 2015–2025 Iryna Sofiian
         </footer>

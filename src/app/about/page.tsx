@@ -22,36 +22,35 @@ const familyPhotos = [
     src: "/me-with-marshal.jpg",
     alt: "Iryna with Marshal",
     caption: "Walks with Marshal",
+    // FIXED: top-right MUST be 0, not 12
+    radius: "rounded-tl-[12px] rounded-tr-[0px] rounded-bl-[12px] rounded-br-[0px]",
   },
   {
     src: "/me-with-maiko.jpeg",
     alt: "Iryna with Maiko",
     caption: "Coffee breaks with Maiko",
+    radius: "rounded-[0px]",
   },
   {
     src: "/marshal.jpeg",
     alt: "Marshal enjoying nature",
     caption: "Marshal — the heart of our family",
+    radius:
+      "rounded-tr-[12px] rounded-br-[12px] rounded-tl-[0px] rounded-bl-[0px]",
   },
 ];
 
 const mosaicPhotos = [
-  {
-    src: "/about-1.jpg",
-    alt: "Workshop moment",
-    span: "md:col-span-2 md:row-span-2",
-  },
+  { src: "/about-1.jpg", alt: "Workshop moment" },
   { src: "/about-2.jpg", alt: "Team collaboration" },
-  { src: "/about-3.jpg", alt: "Sticky notes & structure" },
+  { src: "/about-3.jpg", alt: "Speaking & facilitation" },
   { src: "/about-4.jpg", alt: "Quiet observation" },
-  { src: "/about-5.jpg", alt: "Speaking & facilitation" },
-  { src: "/about-6.jpg", alt: "Another fragment from worklife" },
+  { src: "/about-5.jpg", alt: "Another fragment from worklife" },
 ];
 
 export default function AboutPage() {
   return (
     <main className="bg-white">
-      {/* Container perfectly centered at 768px with NO horizontal padding */}
       <div className="mx-auto w-full max-w-3xl py-24">
         <div className="w-full">
           {/* HERO */}
@@ -110,29 +109,90 @@ export default function AboutPage() {
               real experience remains the foundation while AI is the catalyst.
             </p>
 
-            {/* MOSAIC */}
-            <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-3">
-              {mosaicPhotos.map((photo, index) => (
-                <div
-                  key={photo.src}
-                  className={[
-                    "relative overflow-hidden bg-slate-100",
-                    "min-h-[90px] sm:min-h-[110px] md:min-h-[140px]",
-                    photo.span ?? "",
-                    index === 0
-                      ? "col-span-2 row-span-2 sm:col-span-2 sm:row-span-2 md:col-span-2 md:row-span-2"
-                      : "",
-                  ].join(" ")}
-                >
-                  <Image
-                    src={photo.src}
-                    alt={photo.alt}
-                    fill
-                    className="object-cover transition-transform duration-500 ease-out hover:scale-[1.03]"
-                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 33vw"
-                  />
+            {/* МОЗАЇКА */}
+            <div className="mt-6">
+              <div className="sm:hidden">
+                <div className="grid grid-cols-3 gap-[2px]">
+                  <div className="relative h-[140px] overflow-hidden rounded-l-[12px] bg-slate-100">
+                    <Image
+                      src={mosaicPhotos[0].src}
+                      alt={mosaicPhotos[0].alt}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+
+                  <div className="relative h-[140px] overflow-hidden bg-slate-100">
+                    <Image
+                      src={mosaicPhotos[1].src}
+                      alt={mosaicPhotos[1].alt}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+
+                  <div className="relative h-[140px] overflow-hidden rounded-r-[12px] bg-slate-100">
+                    <Image
+                      src={mosaicPhotos[2].src}
+                      alt={mosaicPhotos[2].alt}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
                 </div>
-              ))}
+              </div>
+
+              {/* Desktop */}
+              <div className="hidden sm:block rounded-[12px] overflow-hidden bg-slate-100">
+                <div className="grid h-[254px] grid-cols-3 grid-rows-2 gap-[2px]">
+                  <div className="relative col-span-1 row-span-2">
+                    <Image
+                      src={mosaicPhotos[0].src}
+                      alt={mosaicPhotos[0].alt}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+
+                  <div className="relative col-span-1 row-span-2">
+                    <Image
+                      src={mosaicPhotos[1].src}
+                      alt={mosaicPhotos[1].alt}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+
+                  <div className="relative">
+                    <Image
+                      src={mosaicPhotos[2].src}
+                      alt={mosaicPhotos[2].alt}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-[2px]">
+                    <div className="relative">
+                      <Image
+                        src={mosaicPhotos[3].src}
+                        alt={mosaicPhotos[3].alt}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+
+                    <div className="relative">
+                      <Image
+                        src={mosaicPhotos[4].src}
+                        alt={mosaicPhotos[4].alt}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <p className="mt-3 text-center text-slate-500 text-[14px] leading-[22px] md:text-[16px] md:leading-[24px]">
@@ -152,21 +212,22 @@ export default function AboutPage() {
               strength. I’m deeply grateful to Lyubomyr for unwavering support.
             </p>
 
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-              {familyPhotos.map(({ src, alt, caption }) => (
-                <figure key={src}>
-                  <div className="overflow-hidden">
+            {/* ТРИ ФОТО */}
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-[2px]">
+              {familyPhotos.map(({ src, alt, caption, radius }) => (
+                <figure key={src} className="flex flex-col">
+                  <div
+                    className={`relative w-full h-[254.67px] overflow-hidden bg-slate-100 ${radius}`}
+                  >
                     <Image
                       src={src}
                       alt={alt}
-                      width={800}
-                      height={600}
-                      className="h-56 w-full object-cover transition-transform duration-300 hover:scale-[1.03]"
-                      sizes="(min-width: 640px) 33vw, 100vw"
+                      fill
+                      className="object-cover"
                     />
                   </div>
 
-                  <figcaption className="mt-3 text-center text-[14px] leading-[22px] text-slate-600 md:text-[16px] md:leading-[24px]">
+                  <figcaption className="mt-4 text-center text-[20px] leading-[32px] text-slate-700">
                     {caption}
                   </figcaption>
                 </figure>
@@ -184,8 +245,9 @@ export default function AboutPage() {
               <div className="rounded-2xl border border-slate-200 bg-slate-50 px-6 py-5 md:px-10">
                 <p className="mb-[10px] flex items-center">
                   <span className="mr-2 text-[16px] leading-[24px] font-semibold text-blue-600">
-                    &gt;_
+                    {" >_"}
                   </span>
+
                   <span className="text-[13px] leading-[20px] tracking-[0.18em] font-semibold uppercase text-slate-500">
                     People
                   </span>
@@ -195,15 +257,16 @@ export default function AboutPage() {
                   <strong className="font-semibold">
                     Users, businesses, technologies
                   </strong>{" "}
-                  — all are about people. I start by listening and understanding.
+                  — all are about people.
                 </p>
               </div>
 
               <div className="rounded-2xl border border-slate-200 bg-slate-50 px-6 py-5 md:px-10">
                 <p className="mb-[10px] flex items-center">
                   <span className="mr-2 text-[16px] leading-[24px] font-semibold text-blue-600">
-                    &gt;_
+                    {" >_"}
                   </span>
+
                   <span className="text-[13px] leading-[20px] tracking-[0.18em] font-semibold uppercase text-slate-500">
                     Continuous Learning
                   </span>
@@ -213,15 +276,16 @@ export default function AboutPage() {
                   <strong className="font-semibold">
                     Tools and methods must adapt.
                   </strong>{" "}
-                  Today’s AI trick may be irrelevant tomorrow. Problems evolve.
+                  Today’s AI trick may be irrelevant tomorrow.
                 </p>
               </div>
 
               <div className="rounded-2xl border border-slate-200 bg-slate-50 px-6 py-5 md:px-10">
                 <p className="mb-[10px] flex items-center">
                   <span className="mr-2 text-[16px] leading-[24px] font-semibold text-blue-600">
-                    &gt;_
+                    {" >_"}
                   </span>
+
                   <span className="text-[13px] leading-[20px] tracking-[0.18em] font-semibold uppercase text-slate-500">
                     Partnership
                   </span>

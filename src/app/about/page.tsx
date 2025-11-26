@@ -109,12 +109,12 @@ export default function AboutPage() {
               real experience remains the foundation while AI is the catalyst.
             </p>
 
-            {/* МОЗАЇКА — MOBILE */}
+            {/* МОЗАЇКА — MOBILE (square) */}
             <div className="mt-6 sm:hidden">
               <div className="rounded-[12px] overflow-hidden bg-slate-100">
-                <div className="grid grid-cols-2 grid-rows-2 gap-[2px] h-[510px]">
-                  {/* Ліве фото: тягнеться по всій висоті */}
-                  <div className="relative col-span-1 row-span-2 h-full">
+                <div className="grid grid-cols-2 grid-rows-2 gap-[2px] aspect-square">
+                  {/* Ліве: тягнеться на 2 рядки по всій висоті квадрата */}
+                  <div className="relative col-span-1 row-span-2">
                     <Image
                       src={mosaicPhotos[0].src}
                       alt={mosaicPhotos[0].alt}
@@ -122,7 +122,7 @@ export default function AboutPage() {
                       className="object-cover"
                     />
                   </div>
-                  {/* Праві квадрати */}
+                  {/* Праві два блоки */}
                   <div className="relative">
                     <Image
                       src={mosaicPhotos[1].src}
@@ -212,12 +212,11 @@ export default function AboutPage() {
               strength. I’m deeply grateful to Lyubomyr for unwavering support.
             </p>
 
-            {/* FAMILY — MOBILE */}
+            {/* FAMILY — MOBILE (square) */}
             <div className="sm:hidden">
               <div className="rounded-[12px] overflow-hidden bg-slate-100">
-                <div className="grid grid-cols-2 grid-rows-2 gap-[2px] h-[510px]">
-                  {/* Ліве фото: тягнеться по всій висоті */}
-                  <div className="relative col-span-1 row-span-2 h-full">
+                <div className="grid grid-cols-2 grid-rows-2 gap-[2px] aspect-square">
+                  <div className="relative col-span-1 row-span-2">
                     <Image
                       src={familyPhotos[0].src}
                       alt={familyPhotos[0].alt}
@@ -225,7 +224,6 @@ export default function AboutPage() {
                       className="object-cover"
                     />
                   </div>
-                  {/* Праві фото */}
                   <div className="relative">
                     <Image
                       src={familyPhotos[1].src}

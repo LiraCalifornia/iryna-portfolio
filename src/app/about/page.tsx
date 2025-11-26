@@ -22,8 +22,8 @@ const familyPhotos = [
     src: "/me-with-marshal.jpg",
     alt: "Iryna with Marshal",
     caption: "Walks with Marshal",
-    // FIXED: top-right MUST be 0, not 12
-    radius: "rounded-tl-[12px] rounded-tr-[0px] rounded-bl-[12px] rounded-br-[0px]",
+    radius:
+      "rounded-tl-[12px] rounded-tr-[0px] rounded-bl-[12px] rounded-br-[0px]",
   },
   {
     src: "/me-with-maiko.jpeg",
@@ -111,38 +111,42 @@ export default function AboutPage() {
 
             {/* МОЗАЇКА */}
             <div className="mt-6">
+              {/* 📱 MOBILE: 2×2 колаж як у сімейному блоці */}
               <div className="sm:hidden">
-                <div className="grid grid-cols-3 gap-[2px]">
-                  <div className="relative h-[140px] overflow-hidden rounded-l-[12px] bg-slate-100">
-                    <Image
-                      src={mosaicPhotos[0].src}
-                      alt={mosaicPhotos[0].alt}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-
-                  <div className="relative h-[140px] overflow-hidden bg-slate-100">
-                    <Image
-                      src={mosaicPhotos[1].src}
-                      alt={mosaicPhotos[1].alt}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-
-                  <div className="relative h-[140px] overflow-hidden rounded-r-[12px] bg-slate-100">
-                    <Image
-                      src={mosaicPhotos[2].src}
-                      alt={mosaicPhotos[2].alt}
-                      fill
-                      className="object-cover"
-                    />
+                <div className="rounded-[12px] overflow-hidden bg-slate-100">
+                  <div className="grid grid-cols-2 grid-rows-2 gap-[2px] h-[510px]">
+                    {/* Ліве високе (2 ряди) */}
+                    <div className="relative col-span-1 row-span-2">
+                      <Image
+                        src={mosaicPhotos[0].src}
+                        alt={mosaicPhotos[0].alt}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    {/* Праворуч верхнє */}
+                    <div className="relative">
+                      <Image
+                        src={mosaicPhotos[1].src}
+                        alt={mosaicPhotos[1].alt}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    {/* Праворуч нижнє */}
+                    <div className="relative">
+                      <Image
+                        src={mosaicPhotos[2].src}
+                        alt={mosaicPhotos[2].alt}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
 
-              {/* Desktop */}
+              {/* 💻 DESKTOP: повна мозаїка з 5 фото */}
               <div className="hidden sm:block rounded-[12px] overflow-hidden bg-slate-100">
                 <div className="grid h-[254px] grid-cols-3 grid-rows-2 gap-[2px]">
                   <div className="relative col-span-1 row-span-2">
@@ -212,8 +216,40 @@ export default function AboutPage() {
               strength. I’m deeply grateful to Lyubomyr for unwavering support.
             </p>
 
-            {/* ТРИ ФОТО */}
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-[2px]">
+            {/* 📱 MOBILE: мозаїка 2×2 */}
+            <div className="sm:hidden">
+              <div className="rounded-[12px] overflow-hidden bg-slate-100">
+                <div className="grid grid-cols-2 grid-rows-2 gap-[2px] h-[510px]">
+                  <div className="relative col-span-1 row-span-2">
+                    <Image
+                      src={familyPhotos[0].src}
+                      alt={familyPhotos[0].alt}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="relative">
+                    <Image
+                      src={familyPhotos[1].src}
+                      alt={familyPhotos[1].alt}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="relative">
+                    <Image
+                      src={familyPhotos[2].src}
+                      alt={familyPhotos[2].alt}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* 💻 DESKTOP: 3 квадрати з кастомним заокругленням + підписи */}
+            <div className="hidden sm:grid sm:grid-cols-3 sm:gap-[2px]">
               {familyPhotos.map(({ src, alt, caption, radius }) => (
                 <figure key={src} className="flex flex-col">
                   <div

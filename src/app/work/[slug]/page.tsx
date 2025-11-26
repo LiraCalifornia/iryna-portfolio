@@ -60,8 +60,8 @@ export default function WorkDetailPage(props: PageProps) {
   return (
     <main className="bg-white">
       {/* головний контентний контейнер */}
-      {/* px-8 = 32px на мобайлі, з sm і вище повертаємось до 0, щоб лишилась чиста колона 768px */}
-      <div className="mx-auto w-full max-w-[768px] px-8 sm:px-0 pt-16 pb-20">
+      {/* ВАЖЛИВО: без горизонтальних px — їх дає глобальний layout-контейнер */}
+      <div className="mx-auto w-full max-w-[768px] pt-16 pb-20">
         {/* Hero image */}
         {image && (
           <div className="relative w-full h-[220px] sm:h-[320px] md:h-[380px] rounded-xl overflow-hidden bg-slate-100">
@@ -124,7 +124,7 @@ export default function WorkDetailPage(props: PageProps) {
             <section className="mt-16 space-y-6 sm:space-y-7">
               {/* Problem */}
               {problem && (
-                <div className="rounded-xl bg-slate-50 border border-slate-200 px-10 py-5 sm:px-10 sm:py-5">
+                <div className="rounded-xl bg-slate-50 border border-slate-200 px-6 py-5 sm:px-10 sm:py-5">
                   {/* >_ (L bold) + CUPS 14 */}
                   <h2 className="flex items-center gap-2">
                     <span className="text-[20px] leading-[32px] font-semibold text-blue-600">
@@ -151,7 +151,7 @@ export default function WorkDetailPage(props: PageProps) {
 
               {/* Solution */}
               {solution && (
-                <div className="rounded-xl bg-slate-50 border border-slate-200 px-10 py-5 sm:px-10 sm:py-5">
+                <div className="rounded-xl bg-slate-50 border border-slate-200 px-6 py-5 sm:px-10 sm:py-5">
                   <h2 className="flex items-center gap-2">
                     <span className="text-[20px] leading-[32px] font-semibold text-blue-600">
                       {">_"}
@@ -177,7 +177,7 @@ export default function WorkDetailPage(props: PageProps) {
 
               {/* Challenges */}
               {challenges && challenges.length > 0 && (
-                <div className="rounded-xl bg-slate-50 border border-slate-200 px-10 py-5 sm:px-10 sm:py-5">
+                <div className="rounded-xl bg-slate-50 border border-slate-200 px-6 py-5 sm:px-10 sm:py-5">
                   <h2 className="flex items-center gap-2">
                     <span className="text-[20px] leading-[32px] font-semibold text-blue-600">
                       {">_"}
@@ -247,7 +247,7 @@ export default function WorkDetailPage(props: PageProps) {
           </>
         ) : (
           <section className="mt-16">
-            <div className="rounded-xl bg-slate-50 border border-slate-200 px-4 py-5 sm:px-6 sm:py-7">
+            <div className="rounded-xl bg-slate-50 border border-slate-200 px-6 py-5 sm:px-10 sm:py-5">
               <p className="text-[16px] leading-[24px] text-slate-600 tracking-[0.01em]">
                 Full case study for this project is coming soon. If you&apos;d
                 like details now, please{" "}
